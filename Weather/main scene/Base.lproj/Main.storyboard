@@ -18,13 +18,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Şişli" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUK-dL-54r">
-                                <rect key="frame" x="169" y="200" width="75" height="20"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="Şişli" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kUK-dL-54r">
+                                <rect key="frame" x="192" y="200" width="30.5" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="22°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOU-GU-TBd">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="22°" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IOU-GU-TBd">
                                 <rect key="frame" x="117" y="247" width="217" height="119"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="100"/>
                                 <nil key="textColor"/>
@@ -66,14 +66,11 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="kUK-dL-54r" firstAttribute="leading" secondItem="x2O-px-D7v" secondAttribute="trailing" constant="66.5" id="8Uo-hs-JFO"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sDf-Gg-jgq" secondAttribute="trailing" constant="20" id="9z9-MW-X6A"/>
-                            <constraint firstItem="kUK-dL-54r" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="169" id="A8r-tg-fNA"/>
                             <constraint firstItem="x2O-px-D7v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="27" id="BVq-63-Iuu"/>
                             <constraint firstItem="PIX-TU-bKO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Bsg-KC-h7W"/>
                             <constraint firstItem="JDp-Ea-WOC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DtA-zZ-4H8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PIX-TU-bKO" secondAttribute="trailing" constant="30" id="F6C-Pl-poX"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kUK-dL-54r" secondAttribute="trailing" constant="170" id="JCv-or-iG7"/>
                             <constraint firstItem="sDf-Gg-jgq" firstAttribute="bottom" secondItem="JDp-Ea-WOC" secondAttribute="bottom" id="LUh-yI-4j4"/>
                             <constraint firstItem="JDp-Ea-WOC" firstAttribute="top" secondItem="IOU-GU-TBd" secondAttribute="bottom" constant="97" id="ONC-1z-lvv"/>
                             <constraint firstItem="IOU-GU-TBd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="117" id="OcO-lN-6rb"/>
@@ -81,6 +78,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IOU-GU-TBd" secondAttribute="trailing" constant="80" id="SBn-a0-sgg"/>
                             <constraint firstItem="x2O-px-D7v" firstAttribute="centerY" secondItem="IOU-GU-TBd" secondAttribute="centerY" id="TVB-OP-dQ2"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="JDp-Ea-WOC" secondAttribute="trailing" id="Ti4-8c-1T2"/>
+                            <constraint firstItem="kUK-dL-54r" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="X3o-kx-zDu"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="PIX-TU-bKO" secondAttribute="bottom" id="hQP-yp-Ahy"/>
                             <constraint firstItem="PIX-TU-bKO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="8" id="ikK-S3-TSP"/>
                             <constraint firstItem="kUK-dL-54r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="112" id="kLx-aK-Sxg"/>
@@ -92,7 +90,9 @@
                     <navigationItem key="navigationItem" id="FLK-pS-DRp"/>
                     <connections>
                         <outlet property="btnAddLocation" destination="sDf-Gg-jgq" id="8v8-pE-xwm"/>
+                        <outlet property="favoritesTableView" destination="PIX-TU-bKO" id="DDB-Xa-BVx"/>
                         <outlet property="imgCurrentWeatherIcon" destination="x2O-px-D7v" id="621-6h-zZu"/>
+                        <outlet property="labelCurrentLocationName" destination="kUK-dL-54r" id="7qS-S6-7gv"/>
                         <outlet property="labelCurrentLocationTemp" destination="IOU-GU-TBd" id="ctU-2h-ljs"/>
                     </connections>
                 </viewController>

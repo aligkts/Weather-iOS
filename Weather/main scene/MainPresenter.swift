@@ -17,23 +17,24 @@ class MainPresenter {
     }
     
     func makeApiRequest(latitude: Double, longitude: Double) {
-        guard let url = URL( string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&&APPID=3c75e1a077769372966bc6050f85b57a&units=Metric&lang=en") else { return }
-        let session = URLSession.shared
-        session.dataTask(with: url) {(data, response, error) in
-            if let response = response {
-                print(response)
-            }
-            if let data = data {
-                print(data)
-                do {
-                    let json = try JSONSerialization.jsonObject(with: data, options: [])
-                    print(json)
-                } catch {
-                    print(error)
+        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&&APPID=3c75e1a077769372966bc6050f85b57a&units=Metric&lang=en") else { return }
+        let config = URLSessionConfiguration.default
+        let session = URLSession(configuration: config)
+        var weatherArray: [WeatherResponse] = []
+        let task = session.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Response Error")
+            } else {
+                if let dataResponse = data,
+                    let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
+                    let weatherModel = WeatherResponse(resultModel: json)
+                    weatherArray.append(weatherModel)
+                }
+                DispatchQueue.main.sync {
+                    self.mainViewDelegate?.setCurrentUiComponents(modelResponse: weatherArray)
                 }
             }
         }.resume()
     }
-    
-    
+
 }

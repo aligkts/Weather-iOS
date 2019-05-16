@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainViewController: UIViewController , MainViewDelegate{
+class MainViewController: UIViewController , MainViewDelegate {
    
     @IBOutlet weak var labelCurrentLocationName:UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
@@ -26,12 +26,15 @@ class MainViewController: UIViewController , MainViewDelegate{
     }
     
     func foundCurrentLocation(latitude: (Double), longitude: (Double)) {
-        print(latitude)
+        mainPresenter.makeApiRequest(latitude: latitude, longitude: longitude)
+    }
+    
+    func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
+            self.labelCurrentLocationName.text = modelResponse[0].name
     }
     
     func permissionDenied() {
        navigateToPermissionDenied()
-        
     }
     
     private func navigateToPermissionDenied () {
@@ -41,10 +44,6 @@ class MainViewController: UIViewController , MainViewDelegate{
         }
         present(mainNavigationVC,animated: true, completion: nil)
     }
-    
-    @IBAction func openAddLocation(_ sender: UIButton) {
-      
-    }
-    
+
 }
 

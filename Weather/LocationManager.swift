@@ -19,7 +19,7 @@ class LocationManager: NSObject , CLLocationManagerDelegate {
         self.mainViewDelegate = mainViewDelegate
     }
     
-    func checkLocationServices() {
+    @objc func checkLocationServices() {
         if CLLocationManager.locationServicesEnabled() {
             if CLLocationManager.authorizationStatus()
                 == .restricted ||

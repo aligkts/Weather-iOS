@@ -17,7 +17,7 @@ class MainPresenter {
     }
     
     func makeApiRequest(latitude: Double, longitude: Double) {
-        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&&APPID=3c75e1a077769372966bc6050f85b57a&units=Metric&lang=en") else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=en") else { return }
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         var weatherArray: [WeatherResponse] = []

@@ -30,7 +30,17 @@ class MainViewController: UIViewController , MainViewDelegate {
     }
     
     func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
-            self.labelCurrentLocationName.text = modelResponse[0].name
+        self.labelCurrentLocationName.text = modelResponse[0].name
+        if let temperature: String = "\(String(describing: modelResponse[0].main?.value(forKey: "temp")))" {
+            print(temperature)
+        }
+//        let temperature = "\(String(describing: modelResponse[0].main?.value(forKey: "temp")))"
+//        self.labelCurrentLocationTemp.text = "\(temperature)\u{00B0}"
+        if let deneme: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
+            let iconUrl = URL(string: "\(Constants.API_IMAGE_BASE_URL)\(deneme).png")
+            downloadImage(from: iconUrl!)
+        }
+        
     }
     
     func permissionDenied() {
@@ -43,6 +53,22 @@ class MainViewController: UIViewController , MainViewDelegate {
             return
         }
         present(mainNavigationVC,animated: true, completion: nil)
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                self.imgCurrentWeatherIcon.image = UIImage(data: data)
+            }
+        }
     }
 
 }

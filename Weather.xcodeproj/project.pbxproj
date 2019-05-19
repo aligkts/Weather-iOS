@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		482F685C2291C16D00FB8BCA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482F685B2291C16D00FB8BCA /* Constants.swift */; };
 		488116B8228BCA8F001D7C05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488116B7228BCA8F001D7C05 /* AppDelegate.swift */; };
 		488116BA228BCA8F001D7C05 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488116B9228BCA8F001D7C05 /* MainViewController.swift */; };
 		488116BD228BCA8F001D7C05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488116BB228BCA8F001D7C05 /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		482F685B2291C16D00FB8BCA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		488116B4228BCA8F001D7C05 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		488116B7228BCA8F001D7C05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		488116B9228BCA8F001D7C05 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -70,6 +72,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		482F685D2291C2DA00FB8BCA /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				482F685B2291C16D00FB8BCA /* Constants.swift */,
+			);
+			path = utils;
+			sourceTree = "<group>";
+		};
 		488116AB228BCA8F001D7C05 = {
 			isa = PBXGroup;
 			children = (
@@ -100,6 +110,7 @@
 				48BE760E228D3FB800A2AD65 /* LocationManager.swift */,
 				48BE75F8228D193900A2AD65 /* MainNavigationController.swift */,
 				488116B7228BCA8F001D7C05 /* AppDelegate.swift */,
+				482F685D2291C2DA00FB8BCA /* utils */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -239,6 +250,7 @@
 				488116BA228BCA8F001D7C05 /* MainViewController.swift in Sources */,
 				488116B8228BCA8F001D7C05 /* AppDelegate.swift in Sources */,
 				48BE761E228D462900A2AD65 /* WeatherResponse.swift in Sources */,
+				482F685C2291C16D00FB8BCA /* Constants.swift in Sources */,
 				48BE75F9228D193900A2AD65 /* MainNavigationController.swift in Sources */,
 				48BE760F228D3FB800A2AD65 /* LocationManager.swift in Sources */,
 				488116DD228BFF6F001D7C05 /* MainViewDelegate.swift in Sources */,

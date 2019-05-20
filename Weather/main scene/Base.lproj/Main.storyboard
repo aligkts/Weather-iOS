@@ -60,11 +60,11 @@
                                 <rect key="frame" x="340" y="442" width="54" height="56"/>
                                 <state key="normal" image="floatingAddButton"/>
                                 <connections>
-                                    <action selector="openAddLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qO8-m0-cCg"/>
+                                    <action selector="navigateAddLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bM4-r9-DRx"/>
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3f-5U-zzw">
-                                <rect key="frame" x="0.0" y="592" width="414" height="270"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YDl-4b-j7s">
@@ -111,6 +111,49 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-800.00000000000011" y="-262.5"/>
+        </scene>
+        <!--Add Location View Controller-->
+        <scene sceneID="nEU-Jg-NsW">
+            <objects>
+                <viewController storyboardIdentifier="AddLocationViewController" id="B0p-33-LQU" customClass="AddLocationViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="y32-bp-4cE">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xqG-K7-cLV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="T3L-mu-o8Y" appends="YES" id="U5u-S9-PKn"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="FFe-zk-mdx" firstAttribute="bottom" secondItem="xqG-K7-cLV" secondAttribute="bottom" id="2kR-Ds-e1J"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="centerY" secondItem="FFe-zk-mdx" secondAttribute="centerY" id="5Hq-iP-HO9"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="leading" secondItem="FFe-zk-mdx" secondAttribute="leading" id="ILi-VH-K9u"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="bottom" secondItem="FFe-zk-mdx" secondAttribute="bottom" id="Jns-jt-jcM"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="centerX" secondItem="FFe-zk-mdx" secondAttribute="centerX" id="O54-vS-gZe"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="trailing" secondItem="FFe-zk-mdx" secondAttribute="trailing" id="ZmX-HK-Vt0"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="ixl-r8-IY9"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="pj8-0v-Ye8"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="rTn-Kr-CXq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="FFe-zk-mdx"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="xqG-K7-cLV" id="Q7y-ac-2i5"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8r9-kf-1Qs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pongPressGestureRecognizer allowableMovement="10" minimumPressDuration="0.5" id="T3L-mu-o8Y">
+                    <connections>
+                        <action selector="PointLongPressed:" destination="B0p-33-LQU" id="5Gx-Fd-VFV"/>
+                    </connections>
+                </pongPressGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-13.043478260869566" y="365.625"/>
         </scene>
         <!--Permission Denied View Controller-->
         <scene sceneID="L1a-Z5-LAf">

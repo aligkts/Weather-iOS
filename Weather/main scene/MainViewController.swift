@@ -10,7 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController , MainViewDelegate {
    
-    @IBOutlet var mainLayout: UIView!
+    @IBOutlet weak var progressLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName:UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
@@ -31,6 +31,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     }
     
     func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
+        self.progressLayout.isHidden = true
         self.labelCurrentLocationName.text = modelResponse[0].name
         if let temperature: String = String(describing: modelResponse[0].main?.value(forKey: "temp") ?? "") {
             let tempValue = (temperature as NSString).integerValue

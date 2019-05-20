@@ -21,7 +21,7 @@ class MainPresenter {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         var weatherArray: [WeatherResponse] = []
-        let task = session.dataTask(with: url) { (data, response, error) in
+        _ = session.dataTask(with: url) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
@@ -49,10 +49,10 @@ class MainPresenter {
     func downloadImage(from url: URL) {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
-            //print(response?.suggestedFilename ?? url.lastPathComponent)
             DispatchQueue.main.async() {
                 self.mainViewDelegate?.iconDownloadedFromIconCode(data: data)
             }
         }
     }
+    
 }

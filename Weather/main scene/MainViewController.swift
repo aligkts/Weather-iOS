@@ -58,7 +58,5 @@ class MainViewController: UIViewController , MainViewDelegate {
         self.imgCurrentWeatherIcon.image = UIImage(data: data)
     }
     
-    
-
 }
 

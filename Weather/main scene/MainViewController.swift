@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController , MainViewDelegate {
    
+    @IBOutlet var mainLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName:UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
@@ -31,16 +32,13 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
         self.labelCurrentLocationName.text = modelResponse[0].name
-        if let temperature: String = "\(String(describing: modelResponse[0].main?.value(forKey: "temp")))" {
-            print(temperature)
+        if let temperature: String = String(describing: modelResponse[0].main?.value(forKey: "temp") ?? "") {
+            let tempValue = (temperature as NSString).integerValue
+            self.labelCurrentLocationTemp.text = "\(tempValue)\u{00B0}"
         }
-//        let temperature = "\(String(describing: modelResponse[0].main?.value(forKey: "temp")))"
-//        self.labelCurrentLocationTemp.text = "\(temperature)\u{00B0}"
-        if let deneme: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
-            let iconUrl = URL(string: "\(Constants.API_IMAGE_BASE_URL)\(deneme).png")
-            downloadImage(from: iconUrl!)
+        if let iconCode: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
+            mainPresenter.downloadImageFromIconCode(iconCode: iconCode)
         }
-        
     }
     
     func permissionDenied() {
@@ -55,21 +53,11 @@ class MainViewController: UIViewController , MainViewDelegate {
         present(mainNavigationVC,animated: true, completion: nil)
     }
     
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    func iconDownloadedFromIconCode(data: Data) {
+        self.imgCurrentWeatherIcon.image = UIImage(data: data)
     }
     
-    func downloadImage(from url: URL) {
-        print("Download Started")
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-            DispatchQueue.main.async() {
-                self.imgCurrentWeatherIcon.image = UIImage(data: data)
-            }
-        }
-    }
+    
 
 }
 

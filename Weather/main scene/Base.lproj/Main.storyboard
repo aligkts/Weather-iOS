@@ -89,11 +89,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="FLK-pS-DRp"/>
                     <connections>
-                        <outlet property="btnAddLocation" destination="sDf-Gg-jgq" id="8v8-pE-xwm"/>
+                        <outlet property="btnAddLocation" destination="sDf-Gg-jgq" id="EXb-h6-f5F"/>
                         <outlet property="favoritesTableView" destination="PIX-TU-bKO" id="DDB-Xa-BVx"/>
                         <outlet property="imgCurrentWeatherIcon" destination="x2O-px-D7v" id="621-6h-zZu"/>
                         <outlet property="labelCurrentLocationName" destination="kUK-dL-54r" id="7qS-S6-7gv"/>
                         <outlet property="labelCurrentLocationTemp" destination="IOU-GU-TBd" id="ctU-2h-ljs"/>
+                        <outlet property="mainLayout" destination="8bC-Xf-vdC" id="inf-pA-O2V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

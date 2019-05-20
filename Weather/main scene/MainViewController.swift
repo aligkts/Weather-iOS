@@ -42,6 +42,14 @@ class MainViewController: UIViewController , MainViewDelegate {
         }
     }
     
+    @IBAction func navigateAddLocation(_ sender: UIButton) {
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "AddLocationViewController") as? AddLocationViewController else {
+            return
+        }
+        present(mainNavigationVC,animated: true, completion: nil)
+    }
+    
     func permissionDenied() {
        navigateToPermissionDenied()
     }

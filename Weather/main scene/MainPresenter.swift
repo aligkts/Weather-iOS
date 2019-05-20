@@ -17,11 +17,11 @@ class MainPresenter {
     }
     
     func makeApiRequest(latitude: Double, longitude: Double) {
-        guard let url = URL(string: "http://api.openweathermap.org/data/2.5/weather?lat=\(latitude)&lon=\(longitude)&&APPID=3c75e1a077769372966bc6050f85b57a&units=Metric&lang=en") else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=en") else { return }
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         var weatherArray: [WeatherResponse] = []
-        let task = session.dataTask(with: url) { (data, response, error) in
+        _ = session.dataTask(with: url) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
@@ -36,5 +36,23 @@ class MainPresenter {
             }
         }.resume()
     }
-
+    
+    func downloadImageFromIconCode(iconCode: String) {
+        let iconUrl = URL(string: "\(Constants.API_IMAGE_BASE_URL)\(iconCode).png")
+        downloadImage(from: iconUrl!)
+    }
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) {
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.sync() {
+                self.mainViewDelegate?.iconDownloadedFromIconCode(data: data)
+            }
+        }
+    }
+    
 }

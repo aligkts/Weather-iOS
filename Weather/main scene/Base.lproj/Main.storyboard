@@ -63,6 +63,17 @@
                                     <action selector="openAddLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="qO8-m0-cCg"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3f-5U-zzw">
+                                <rect key="frame" x="0.0" y="592" width="414" height="270"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="YDl-4b-j7s">
+                                        <rect key="frame" x="197" y="377" width="20" height="20"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -89,11 +100,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="FLK-pS-DRp"/>
                     <connections>
-                        <outlet property="btnAddLocation" destination="sDf-Gg-jgq" id="8v8-pE-xwm"/>
+                        <outlet property="btnAddLocation" destination="sDf-Gg-jgq" id="EXb-h6-f5F"/>
                         <outlet property="favoritesTableView" destination="PIX-TU-bKO" id="DDB-Xa-BVx"/>
                         <outlet property="imgCurrentWeatherIcon" destination="x2O-px-D7v" id="621-6h-zZu"/>
                         <outlet property="labelCurrentLocationName" destination="kUK-dL-54r" id="7qS-S6-7gv"/>
                         <outlet property="labelCurrentLocationTemp" destination="IOU-GU-TBd" id="ctU-2h-ljs"/>
+                        <outlet property="progressLayout" destination="D3f-5U-zzw" id="NYQ-mc-hIr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

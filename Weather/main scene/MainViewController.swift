@@ -10,6 +10,7 @@ import UIKit
 
 class MainViewController: UIViewController , MainViewDelegate {
    
+    @IBOutlet weak var progressLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName:UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
@@ -30,7 +31,15 @@ class MainViewController: UIViewController , MainViewDelegate {
     }
     
     func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
-            self.labelCurrentLocationName.text = modelResponse[0].name
+        self.progressLayout.isHidden = true
+        self.labelCurrentLocationName.text = modelResponse[0].name
+        if let temperature: String = String(describing: modelResponse[0].main?.value(forKey: "temp") ?? "") {
+            let tempValue = (temperature as NSString).integerValue
+            self.labelCurrentLocationTemp.text = "\(tempValue)\u{00B0}"
+        }
+        if let iconCode: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
+            mainPresenter.downloadImageFromIconCode(iconCode: iconCode)
+        }
     }
     
     func permissionDenied() {
@@ -44,6 +53,10 @@ class MainViewController: UIViewController , MainViewDelegate {
         }
         present(mainNavigationVC,animated: true, completion: nil)
     }
-
+    
+    func iconDownloadedFromIconCode(data: Data) {
+        self.imgCurrentWeatherIcon.image = UIImage(data: data)
+    }
+    
 }
 

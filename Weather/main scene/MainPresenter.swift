@@ -49,7 +49,7 @@ class MainPresenter {
     func downloadImage(from url: URL) {
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
-            DispatchQueue.main.async() {
+            DispatchQueue.main.sync() {
                 self.mainViewDelegate?.iconDownloadedFromIconCode(data: data)
             }
         }

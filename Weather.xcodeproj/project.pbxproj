@@ -23,6 +23,10 @@
 		48BE761E228D462900A2AD65 /* WeatherResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48BE7617228D462900A2AD65 /* WeatherResponse.swift */; };
 		48E232B0229282FC005B3C2B /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E232AF229282FC005B3C2B /* AddLocationViewController.swift */; };
 		48E232B322928BB0005B3C2B /* AddLocationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E232B222928BB0005B3C2B /* AddLocationPresenter.swift */; };
+		48E232BA2292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E232B82292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift */; };
+		48E232BB2292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E232B92292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift */; };
+		48E232BD2292C2DB005B3C2B /* PersistentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E232BC2292C2DB005B3C2B /* PersistentService.swift */; };
+		48E232BF2292CC1A005B3C2B /* AddLocationViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E232BE2292CC1A005B3C2B /* AddLocationViewDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +60,10 @@
 		48BE7617228D462900A2AD65 /* WeatherResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherResponse.swift; path = ../../../../Downloads/codegen_5cdd0e72bb489/WeatherResponse.swift; sourceTree = "<group>"; };
 		48E232AF229282FC005B3C2B /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		48E232B222928BB0005B3C2B /* AddLocationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationPresenter.swift; sourceTree = "<group>"; };
+		48E232B82292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteLocationEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		48E232B92292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteLocationEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		48E232BC2292C2DB005B3C2B /* PersistentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistentService.swift; sourceTree = "<group>"; };
+		48E232BE2292CC1A005B3C2B /* AddLocationViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +119,8 @@
 				48BE7610228D428C00A2AD65 /* main scene */,
 				482F685D2291C2DA00FB8BCA /* utils */,
 				488116C1228BCA92001D7C05 /* Assets.xcassets */,
+				48E232B82292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift */,
+				48E232B92292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift */,
 				488116C3228BCA92001D7C05 /* LaunchScreen.storyboard */,
 				488116C6228BCA92001D7C05 /* Info.plist */,
 				488116BE228BCA8F001D7C05 /* Weather.xcdatamodeld */,
@@ -144,6 +154,7 @@
 		48BE7613228D461300A2AD65 /* data */ = {
 			isa = PBXGroup;
 			children = (
+				48E232BC2292C2DB005B3C2B /* PersistentService.swift */,
 				48BE7617228D462900A2AD65 /* WeatherResponse.swift */,
 			);
 			path = data;
@@ -154,6 +165,7 @@
 			children = (
 				48E232AF229282FC005B3C2B /* AddLocationViewController.swift */,
 				48E232B222928BB0005B3C2B /* AddLocationPresenter.swift */,
+				48E232BE2292CC1A005B3C2B /* AddLocationViewDelegate.swift */,
 			);
 			path = "add location";
 			sourceTree = "<group>";
@@ -259,7 +271,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				48E232BF2292CC1A005B3C2B /* AddLocationViewDelegate.swift in Sources */,
 				48BE75FB228D1A7400A2AD65 /* PermissionDeniedViewController.swift in Sources */,
+				48E232BB2292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift in Sources */,
 				488116C0228BCA8F001D7C05 /* Weather.xcdatamodeld in Sources */,
 				488116BA228BCA8F001D7C05 /* MainViewController.swift in Sources */,
 				488116B8228BCA8F001D7C05 /* AppDelegate.swift in Sources */,
@@ -268,7 +282,9 @@
 				482F685C2291C16D00FB8BCA /* Constants.swift in Sources */,
 				48BE75F9228D193900A2AD65 /* MainNavigationController.swift in Sources */,
 				48BE760F228D3FB800A2AD65 /* LocationManager.swift in Sources */,
+				48E232BA2292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift in Sources */,
 				488116DD228BFF6F001D7C05 /* MainViewDelegate.swift in Sources */,
+				48E232BD2292C2DB005B3C2B /* PersistentService.swift in Sources */,
 				488116DB228BFEA4001D7C05 /* MainPresenter.swift in Sources */,
 				48E232B322928BB0005B3C2B /* AddLocationPresenter.swift in Sources */,
 			);

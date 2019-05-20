@@ -10,34 +10,42 @@ import UIKit
 import CoreLocation
 import MapKit
 
-class AddLocationViewController: UIViewController {
+class AddLocationViewController: UIViewController, AddLocationViewDelegate {
     
     @IBOutlet weak var mapView: MKMapView!
+    private let presenter = AddLocationPresenter()
     
     override func viewDidLoad() {
-        //add annotations from db bookmarklist
+        presenter.setViewDelegate(addLocationViewDelegate: self)
+        presenter.getFavoritesFromDb()
     }
-
+    
+    func favoritesFromCoreData(favoritesList: [FavoriteLocationEntity]) {
+        for i in favoritesList {
+            addMarkerToMap(latitude: i.latitude, longitude: i.longitude)
+        }
+    }
+    
     @IBAction func PointLongPressed(_ sender: UILongPressGestureRecognizer) {
         mapView.showsUserLocation = true
         let touchPoint = sender.location(in: mapView)
         let coord: CLLocationCoordinate2D = mapView.convert(touchPoint, toCoordinateFrom: mapView)
-        addMarkerToMap(coord: coord)
+        addMarkerToMap(latitude: coord.latitude, longitude: coord.longitude)
         let dialogMessage = UIAlertController(title: "Favoriler", message: "Bu lokasyonu eklemek istediğinize emin misiniz?", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "Evet", style: .default, handler: { (action) -> Void in
-            //insert db
+            self.presenter.addEntityToCoreData(coord: coord)
         })
         let actionCancel = UIAlertAction(title: "Hayır", style: .cancel) { (action) -> Void in
             self.removeMarkerFromMap(coord: coord)
-            //remove annotation
         }
         dialogMessage.addAction(actionOk)
         dialogMessage.addAction(actionCancel)
         self.present(dialogMessage, animated: true, completion: nil)
     }
     
-    func addMarkerToMap(coord: CLLocationCoordinate2D) {
+    func addMarkerToMap(latitude: Double, longitude: Double) {
         let annotation = MKPointAnnotation()
+        let coord = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         annotation.coordinate = coord
         annotation.subtitle = "\(round(1000*coord.longitude)/1000), \(round(1000*coord.latitude)/1000)"
         mapView.addAnnotation(annotation)

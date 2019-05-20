@@ -120,8 +120,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xqG-K7-cLV">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            <mapView multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xqG-K7-cLV">
+                                <rect key="frame" x="0.0" y="44" width="414" height="852"/>
                                 <gestureRecognizers/>
                                 <connections>
                                     <outletCollection property="gestureRecognizers" destination="T3L-mu-o8Y" appends="YES" id="U5u-S9-PKn"/>
@@ -130,15 +130,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="FFe-zk-mdx" firstAttribute="bottom" secondItem="xqG-K7-cLV" secondAttribute="bottom" id="2kR-Ds-e1J"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="centerY" secondItem="FFe-zk-mdx" secondAttribute="centerY" id="5Hq-iP-HO9"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="leading" secondItem="FFe-zk-mdx" secondAttribute="leading" id="ILi-VH-K9u"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="bottom" secondItem="FFe-zk-mdx" secondAttribute="bottom" id="Jns-jt-jcM"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="centerX" secondItem="FFe-zk-mdx" secondAttribute="centerX" id="O54-vS-gZe"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="trailing" secondItem="FFe-zk-mdx" secondAttribute="trailing" id="ZmX-HK-Vt0"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="ixl-r8-IY9"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="pj8-0v-Ye8"/>
-                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="rTn-Kr-CXq"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="leading" secondItem="y32-bp-4cE" secondAttribute="leading" id="0dN-1g-jZO"/>
+                            <constraint firstItem="xqG-K7-cLV" firstAttribute="top" secondItem="FFe-zk-mdx" secondAttribute="top" id="1VD-UN-AWX"/>
+                            <constraint firstAttribute="trailing" secondItem="xqG-K7-cLV" secondAttribute="trailing" id="URv-GA-Nfa"/>
+                            <constraint firstAttribute="bottom" secondItem="xqG-K7-cLV" secondAttribute="bottom" id="fnm-vf-w9g"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FFe-zk-mdx"/>
                     </view>

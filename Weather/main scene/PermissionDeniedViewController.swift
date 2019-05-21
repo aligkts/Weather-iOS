@@ -12,7 +12,7 @@ import UIKit
 class PermissionDeniedViewController: UIViewController {
     
     @IBAction func goSettingsForPermission(_ sender: UIButton) {
-    UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
+        UIApplication.shared.open(URL(string:UIApplication.openSettingsURLString)!)
     }
     
 }

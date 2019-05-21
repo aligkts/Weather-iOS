@@ -13,9 +13,9 @@ import MapKit
 class MainPresenter {
     
     weak private var mainViewDelegate : MainViewDelegate?
-    var favoriteEntity = [FavoriteLocationEntity]()
+    var favoriteLocationList = [FavoriteLocationEntity]()
 
-    func setViewDelegate(mainViewDelegate:MainViewDelegate?){
+    func setViewDelegate(mainViewDelegate:MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
     }
     
@@ -39,11 +39,11 @@ class MainPresenter {
     func getFavoritesFromCoreData() {
         let fetchRequest: NSFetchRequest<FavoriteLocationEntity> = FavoriteLocationEntity.fetchRequest()
         do {
-            let entity = try PersistentService.context.fetch(fetchRequest)
-            self.favoriteEntity = entity
+            let bookmarkList = try PersistentService.context.fetch(fetchRequest)
+            self.favoriteLocationList = bookmarkList
         } catch {}
-        for i in favoriteEntity {
-            makeApiRequestForFavorites(latitude: i.longitude, longitude: i.longitude)
+        for index in favoriteLocationList {
+            makeApiRequestForFavorites(latitude: index.longitude, longitude: index.longitude)
         }
     }
     
@@ -58,7 +58,6 @@ class MainPresenter {
                     let weatherModel = WeatherResponse(resultModel: json)
                     self.mainViewDelegate?.favoritesRequestResult(model: weatherModel)
                 }
-                
             }
         }
     }

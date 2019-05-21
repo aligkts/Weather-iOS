@@ -18,7 +18,7 @@ extension UIImageView {
                 print(error as Any)
                 return
             }
-            DispatchQueue.main.async(execute: { () -> Void in
+            DispatchQueue.main.sync(execute: { () -> Void in
                 let image = UIImage(data: data!)
                 self.image = image
             })

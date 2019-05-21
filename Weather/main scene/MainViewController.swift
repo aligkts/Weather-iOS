@@ -31,7 +31,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     func favoritesRequestResult(model: WeatherResponse) {
         favoritesListResultFromApi.append(model)
-        if favoritesListResultFromApi.count == mainPresenter.favoriteEntity.count {
+        if favoritesListResultFromApi.count == mainPresenter.favoriteLocationList.count {
             favoritesTableView.reloadData()
         }
     }
@@ -80,10 +80,14 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let favoriteItem = favoritesListResultFromApi[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as! WeatherCell
-        cell.setWeatherItem(item: favoriteItem)
-        return cell
+        if indexPath.section == 0 {
+            let favoriteItem = favoritesListResultFromApi[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as! WeatherCell
+            cell.setWeatherItem(item: favoriteItem)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
     }
 
 }

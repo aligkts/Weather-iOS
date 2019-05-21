@@ -7,50 +7,58 @@
 //
 
 import Foundation
+import CoreData
+import MapKit
 
 class MainPresenter {
     
     weak private var mainViewDelegate : MainViewDelegate?
-    
+    var favoriteEntity = [FavoriteLocationEntity]()
+
     func setViewDelegate(mainViewDelegate:MainViewDelegate?){
         self.mainViewDelegate = mainViewDelegate
     }
     
     func makeApiRequest(latitude: Double, longitude: Double) {
-        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=en") else { return }
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config)
+        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
         var weatherArray: [WeatherResponse] = []
-        _ = session.dataTask(with: url) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url) { (data, response, error) in
+            if error != nil {
+                print(error?.localizedDescription ?? "Response Error")
+            } else {
+                if let dataResponse = data,
+                let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
+                let weatherModel = WeatherResponse(resultModel: json)
+                    weatherArray.append(weatherModel)
+                }
+                self.mainViewDelegate?.setCurrentUiComponents(modelResponse: weatherArray)
+            }
+        }
+    }
+    
+    func getFavoritesFromCoreData() {
+        let fetchRequest: NSFetchRequest<FavoriteLocationEntity> = FavoriteLocationEntity.fetchRequest()
+        do {
+            let entity = try PersistentService.context.fetch(fetchRequest)
+            self.favoriteEntity = entity
+        } catch {}
+        for i in favoriteEntity {
+            makeApiRequestForFavorites(latitude: i.longitude, longitude: i.longitude)
+        }
+    }
+    
+    func makeApiRequestForFavorites(latitude: Double, longitude: Double) {
+        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
+        TaskManager.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
                 if let dataResponse = data,
                     let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
                     let weatherModel = WeatherResponse(resultModel: json)
-                    weatherArray.append(weatherModel)
+                    self.mainViewDelegate?.favoritesRequestResult(model: weatherModel)
                 }
-                DispatchQueue.main.sync {
-                    self.mainViewDelegate?.setCurrentUiComponents(modelResponse: weatherArray)
-                }
-            }
-        }.resume()
-    }
-    
-    func downloadImageFromIconCode(iconCode: String) {
-        let iconUrl = URL(string: "\(Constants.API_IMAGE_BASE_URL)\(iconCode).png")
-        downloadImage(from: iconUrl!)
-    }
-    
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-    
-    func downloadImage(from url: URL) {
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            DispatchQueue.main.sync() {
-                self.mainViewDelegate?.iconDownloadedFromIconCode(data: data)
+                
             }
         }
     }

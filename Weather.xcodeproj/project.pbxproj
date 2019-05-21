@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		482F685C2291C16D00FB8BCA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 482F685B2291C16D00FB8BCA /* Constants.swift */; };
+		487C78562293C01C00FFF9F6 /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C78552293C01C00FFF9F6 /* WeatherCell.swift */; };
+		487C78662293F8F700FFF9F6 /* TaskManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C78652293F8F700FFF9F6 /* TaskManager.swift */; };
+		487C786C22940E9B00FFF9F6 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 487C786B22940E9B00FFF9F6 /* Extension.swift */; };
 		488116B8228BCA8F001D7C05 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488116B7228BCA8F001D7C05 /* AppDelegate.swift */; };
 		488116BA228BCA8F001D7C05 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 488116B9228BCA8F001D7C05 /* MainViewController.swift */; };
 		488116BD228BCA8F001D7C05 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 488116BB228BCA8F001D7C05 /* Main.storyboard */; };
@@ -41,6 +44,11 @@
 
 /* Begin PBXFileReference section */
 		482F685B2291C16D00FB8BCA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		487C78552293C01C00FFF9F6 /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
+		487C78652293F8F700FFF9F6 /* TaskManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskManager.swift; sourceTree = "<group>"; };
+		487C7867229402D300FFF9F6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Main.strings; sourceTree = "<group>"; };
+		487C7868229402D300FFF9F6 /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		487C786B22940E9B00FFF9F6 /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		488116B4228BCA8F001D7C05 /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		488116B7228BCA8F001D7C05 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		488116B9228BCA8F001D7C05 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -89,6 +97,7 @@
 			children = (
 				48BE760E228D3FB800A2AD65 /* LocationManager.swift */,
 				482F685B2291C16D00FB8BCA /* Constants.swift */,
+				487C786B22940E9B00FFF9F6 /* Extension.swift */,
 			);
 			path = utils;
 			sourceTree = "<group>";
@@ -126,6 +135,8 @@
 				488116BE228BCA8F001D7C05 /* Weather.xcdatamodeld */,
 				48BE75F8228D193900A2AD65 /* MainNavigationController.swift */,
 				488116B7228BCA8F001D7C05 /* AppDelegate.swift */,
+				487C78552293C01C00FFF9F6 /* WeatherCell.swift */,
+				487C78652293F8F700FFF9F6 /* TaskManager.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -232,8 +243,8 @@
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				tr,
 			);
 			mainGroup = 488116AB228BCA8F001D7C05;
 			productRefGroup = 488116B5228BCA8F001D7C05 /* Products */;
@@ -281,9 +292,12 @@
 				48E232B0229282FC005B3C2B /* AddLocationViewController.swift in Sources */,
 				482F685C2291C16D00FB8BCA /* Constants.swift in Sources */,
 				48BE75F9228D193900A2AD65 /* MainNavigationController.swift in Sources */,
+				487C78662293F8F700FFF9F6 /* TaskManager.swift in Sources */,
 				48BE760F228D3FB800A2AD65 /* LocationManager.swift in Sources */,
 				48E232BA2292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift in Sources */,
+				487C786C22940E9B00FFF9F6 /* Extension.swift in Sources */,
 				488116DD228BFF6F001D7C05 /* MainViewDelegate.swift in Sources */,
+				487C78562293C01C00FFF9F6 /* WeatherCell.swift in Sources */,
 				48E232BD2292C2DB005B3C2B /* PersistentService.swift in Sources */,
 				488116DB228BFEA4001D7C05 /* MainPresenter.swift in Sources */,
 				48E232B322928BB0005B3C2B /* AddLocationPresenter.swift in Sources */,
@@ -313,6 +327,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				488116BC228BCA8F001D7C05 /* Base */,
+				487C7867229402D300FFF9F6 /* tr */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -321,6 +336,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				488116C4228BCA92001D7C05 /* Base */,
+				487C7868229402D300FFF9F6 /* tr */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -332,6 +348,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -393,6 +410,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

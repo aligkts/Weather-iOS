@@ -22,7 +22,6 @@ extension UIImageView {
                 let image = UIImage(data: data!)
                 self.image = image
             })
-            
         }).resume()
     }}
 

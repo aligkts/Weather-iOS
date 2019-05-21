@@ -75,6 +75,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
         return favoritesListResultFromApi.count
     }
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let favoriteItem = favoritesListResultFromApi[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as! WeatherCell

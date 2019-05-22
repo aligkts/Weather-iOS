@@ -7,20 +7,18 @@
 //
 
 import UIKit
-import CoreLocation
 import MapKit
 
-class AddLocationViewController: UIViewController, AddLocationViewDelegate {
+class AddLocationViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
-    private let presenter = AddLocationPresenter()
     
     override func viewDidLoad() {
-        presenter.setViewDelegate(addLocationViewDelegate: self)
-        presenter.getFavoritesFromDb()
+        addMarkersToMapFromCoreData()
     }
     
-    func favoritesFromCoreData(favoritesList: [FavoriteLocationEntity]) {
+    func addMarkersToMapFromCoreData() {
+        let favoritesList = PersistentService.fetchAll
         for i in favoritesList {
             addMarkerToMap(latitude: i.latitude, longitude: i.longitude)
         }
@@ -33,7 +31,7 @@ class AddLocationViewController: UIViewController, AddLocationViewDelegate {
         addMarkerToMap(latitude: coord.latitude, longitude: coord.longitude)
         let dialogMessage = UIAlertController(title: "Favoriler", message: "Bu lokasyonu eklemek istediğinize emin misiniz?", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "Evet", style: .default, handler: { (action) -> Void in
-            self.presenter.addEntityToCoreData(coord: coord)
+            PersistentService.addEntityToCoreData(latitude: coord.latitude, longitude: coord.longitude)
         })
         let actionCancel = UIAlertAction(title: "Hayır", style: .cancel) { (action) -> Void in
             self.removeMarkerFromMap(coord: coord)

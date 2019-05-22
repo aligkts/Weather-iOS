@@ -24,14 +24,18 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favoritesList.removeAll()
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
-        mainPresenter.getFavoritesFromCoreData()
+        mainPresenter.getResults()
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
     }
     
-    func favoritesRequestResult(model: WeatherResponse) {
+    @objc func loadList() {
+        mainPresenter.getResults()
+    }
+    
+    func addModelToList(model: WeatherResponse) {
         favoritesList.append(model)
         if favoritesList.count == mainPresenter.favoriteLocationList.count {
             filteredFavoritesList = favoritesList
@@ -83,14 +87,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
             let favoriteItem = filteredFavoritesList[indexPath.row]
-            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as! WeatherCell
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as? WeatherCell else { return UITableViewCell() }
             cell.setWeatherItem(item: favoriteItem)
             return cell
-        } else {
-            return UITableViewCell()
-        }
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -99,6 +99,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
             filteredFavoritesList = favoritesList.filter({
                 ($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
             })
+        }
+        favoritesTableView.reloadData()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            favoritesList.remove(at: indexPath.row)
+            filteredFavoritesList.remove(at: indexPath.row)
+            PersistentService.deleteItem(row: indexPath.row)
+            mainPresenter.getResults()
         }
         favoritesTableView.reloadData()
     }

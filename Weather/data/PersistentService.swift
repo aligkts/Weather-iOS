@@ -44,7 +44,29 @@ class PersistentService {
         return container
     }()
     
-    // MARK: - Core Data Saving support
+    static func deleteItem(row: Int) {
+        var bookmarkList = PersistentService.fetchAll
+        let task = bookmarkList[row]
+        self.context.delete(task)
+        self.saveContext()
+    }
+    
+    static func addEntityToCoreData(latitude: Double, longitude: Double) {
+        let favoriteLocationPoint = FavoriteLocationEntity(context: self.context)
+        favoriteLocationPoint.latitude = latitude
+        favoriteLocationPoint.longitude = longitude
+        PersistentService.saveContext()
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+    }
+    
+    static var fetchAll: [FavoriteLocationEntity] {
+        let fetchRequest: NSFetchRequest<FavoriteLocationEntity> = FavoriteLocationEntity.fetchRequest()
+        var bookmarkList = [FavoriteLocationEntity]()
+        do {
+            bookmarkList = try PersistentService.context.fetch(fetchRequest)
+        } catch {}
+        return bookmarkList
+    }
     
     static func saveContext () {
         let context = persistentContainer.viewContext

@@ -7,14 +7,13 @@
 //
 
 import Foundation
-import CoreData
 import MapKit
 
 class MainPresenter {
     
     weak private var mainViewDelegate : MainViewDelegate?
     var favoriteLocationList = [FavoriteLocationEntity]()
-    let fetchRequest: NSFetchRequest<FavoriteLocationEntity> = FavoriteLocationEntity.fetchRequest()
+    
 
     func setViewDelegate(mainViewDelegate:MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
@@ -37,16 +36,14 @@ class MainPresenter {
         }
     }
     
-    func getFavoritesFromCoreData() {
-        do {
-            let bookmarkList = try PersistentService.context.fetch(fetchRequest)
-            self.favoriteLocationList = bookmarkList
-        } catch {}
+    func getResults() {
+        self.favoriteLocationList = PersistentService.fetchAll
         for index in favoriteLocationList {
             makeApiRequestForFavorites(latitude: index.latitude, longitude: index.longitude)
+            //Can be better with using escaping closure
         }
     }
-    
+   
     func makeApiRequestForFavorites(latitude: Double, longitude: Double) {
         guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
         TaskManager.shared.dataTask(with: url) { (data, response, error) in
@@ -56,7 +53,7 @@ class MainPresenter {
                 if let dataResponse = data,
                     let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
                     let weatherModel = WeatherResponse(resultModel: json)
-                    self.mainViewDelegate?.favoritesRequestResult(model: weatherModel)
+                    self.mainViewDelegate?.addModelToList(model: weatherModel)
                 }
             }
         }

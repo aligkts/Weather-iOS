@@ -14,6 +14,7 @@ class MainPresenter {
     
     weak private var mainViewDelegate : MainViewDelegate?
     var favoriteLocationList = [FavoriteLocationEntity]()
+    let fetchRequest: NSFetchRequest<FavoriteLocationEntity> = FavoriteLocationEntity.fetchRequest()
 
     func setViewDelegate(mainViewDelegate:MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
@@ -37,13 +38,12 @@ class MainPresenter {
     }
     
     func getFavoritesFromCoreData() {
-        let fetchRequest: NSFetchRequest<FavoriteLocationEntity> = FavoriteLocationEntity.fetchRequest()
         do {
             let bookmarkList = try PersistentService.context.fetch(fetchRequest)
             self.favoriteLocationList = bookmarkList
         } catch {}
         for index in favoriteLocationList {
-            makeApiRequestForFavorites(latitude: index.longitude, longitude: index.longitude)
+            makeApiRequestForFavorites(latitude: index.latitude, longitude: index.longitude)
         }
     }
     

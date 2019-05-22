@@ -1,0 +1,18 @@
+
+/* Class = "UILabel"; text = "Devam etmek için konum izni vermeniz gerekmektedir"; ObjectID = "6IL-ag-nJ6"; */
+"6IL-ag-nJ6.text" = "Devam etmek için konum izni vermeniz gerekmektedir";
+
+/* Class = "UILabel"; text = "22°"; ObjectID = "IOU-GU-TBd"; */
+"IOU-GU-TBd.text" = "22°";
+
+/* Class = "UILabel"; text = "Şişli"; ObjectID = "kUK-dL-54r"; */
+"kUK-dL-54r.text" = "Şişli";
+
+/* Class = "UIButton"; normalTitle = "Ayarlar"; ObjectID = "liN-iH-OfO"; */
+"liN-iH-OfO.normalTitle" = "Ayarlar";
+
+/* Class = "UILabel"; text = "Kağıthane"; ObjectID = "pNe-LM-2v1"; */
+"pNe-LM-2v1.text" = "Kağıthane";
+
+/* Class = "UILabel"; text = "17°"; ObjectID = "uDo-JS-NW7"; */
+"uDo-JS-NW7.text" = "17°";

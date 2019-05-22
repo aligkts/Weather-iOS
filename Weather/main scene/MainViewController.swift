@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController , MainViewDelegate {
-   
+    
     @IBOutlet weak var progressLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName:UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
@@ -18,12 +18,22 @@ class MainViewController: UIViewController , MainViewDelegate {
     @IBOutlet weak var favoritesTableView: UITableView!
     private let mainPresenter = MainPresenter()
     private let locationManager = LocationManager()
-
+    var favoritesListResultFromApi: [WeatherResponse] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        favoritesListResultFromApi.removeAll()
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
+        mainPresenter.getFavoritesFromCoreData()
+    }
+    
+    func favoritesRequestResult(model: WeatherResponse) {
+        favoritesListResultFromApi.append(model)
+        if favoritesListResultFromApi.count == mainPresenter.favoriteLocationList.count {
+            favoritesTableView.reloadData()
+        }
     }
     
     func foundCurrentLocation(latitude: (Double), longitude: (Double)) {
@@ -33,12 +43,11 @@ class MainViewController: UIViewController , MainViewDelegate {
     func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
         self.progressLayout.isHidden = true
         self.labelCurrentLocationName.text = modelResponse[0].name
-        if let temperature: String = String(describing: modelResponse[0].main?.value(forKey: "temp") ?? "") {
-            let tempValue = (temperature as NSString).integerValue
-            self.labelCurrentLocationTemp.text = "\(tempValue)\u{00B0}"
-        }
+        let temperature = String(describing: modelResponse[0].main?.value(forKey: "temp") ?? "")
+        let tempValue = (temperature as NSString).integerValue
+        self.labelCurrentLocationTemp.text = "\(tempValue)°"
         if let iconCode: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
-            mainPresenter.downloadImageFromIconCode(iconCode: iconCode)
+            imgCurrentWeatherIcon.imageFromIconCode(iconCode: iconCode)
         }
     }
     
@@ -59,9 +68,26 @@ class MainViewController: UIViewController , MainViewDelegate {
         present(mainNavigationVC,animated: true, completion: nil)
     }
     
-    func iconDownloadedFromIconCode(data: Data) {
-        self.imgCurrentWeatherIcon.image = UIImage(data: data)
-    }
-    
 }
 
+extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favoritesListResultFromApi.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let favoriteItem = favoritesListResultFromApi[indexPath.row]
+            let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as! WeatherCell
+            cell.setWeatherItem(item: favoriteItem)
+            return cell
+        } else {
+            return UITableViewCell()
+        }
+    }
+
+}

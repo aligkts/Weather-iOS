@@ -16,13 +16,15 @@ class MainViewController: UIViewController , MainViewDelegate {
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
     @IBOutlet weak var btnAddLocation: UIButton!
     @IBOutlet weak var favoritesTableView: UITableView!
+    @IBOutlet weak var searchBar: UISearchBar!
     private let mainPresenter = MainPresenter()
     private let locationManager = LocationManager()
-    var favoritesListResultFromApi: [WeatherResponse] = []
+    var favoritesList: [WeatherResponse] = []
+    var filteredFavoritesList: [WeatherResponse] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favoritesListResultFromApi.removeAll()
+        favoritesList.removeAll()
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
@@ -30,8 +32,9 @@ class MainViewController: UIViewController , MainViewDelegate {
     }
     
     func favoritesRequestResult(model: WeatherResponse) {
-        favoritesListResultFromApi.append(model)
-        if favoritesListResultFromApi.count == mainPresenter.favoriteLocationList.count {
+        favoritesList.append(model)
+        if favoritesList.count == mainPresenter.favoriteLocationList.count {
+            filteredFavoritesList = favoritesList
             favoritesTableView.reloadData()
         }
     }
@@ -70,9 +73,9 @@ class MainViewController: UIViewController , MainViewDelegate {
     
 }
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate {
+extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favoritesListResultFromApi.count
+        return filteredFavoritesList.count
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -81,13 +84,23 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            let favoriteItem = favoritesListResultFromApi[indexPath.row]
+            let favoriteItem = filteredFavoritesList[indexPath.row]
             let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as! WeatherCell
             cell.setWeatherItem(item: favoriteItem)
             return cell
         } else {
             return UITableViewCell()
         }
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredFavoritesList = favoritesList
+        if searchText.isEmpty == false {
+            filteredFavoritesList = favoritesList.filter({
+                ($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
+            })
+        }
+        favoritesTableView.reloadData()
     }
 
 }

@@ -54,7 +54,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kağıthane" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pNe-LM-2v1">
-                                                    <rect key="frame" x="12" y="8" width="249.5" height="27.5"/>
+                                                    <rect key="frame" x="12" y="8" width="249.5" height="28"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -103,6 +103,17 @@
                                     <action selector="navigateAddLocation:" destination="BYZ-38-t0r" eventType="touchUpInside" id="bM4-r9-DRx"/>
                                 </connections>
                             </button>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Np3-XN-pz1">
+                                <rect key="frame" x="0.0" y="96" width="414" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="414" id="4cf-R5-gGM"/>
+                                </constraints>
+                                <color key="barTintColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="Mx1-5K-mby"/>
+                                </connections>
+                            </searchBar>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="D3f-5U-zzw">
                                 <rect key="frame" x="0.0" y="88" width="414" height="782"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -117,6 +128,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Np3-XN-pz1" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="17x-I0-4Ky"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="sDf-Gg-jgq" secondAttribute="trailing" constant="20" id="9z9-MW-X6A"/>
                             <constraint firstItem="x2O-px-D7v" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="27" id="BVq-63-Iuu"/>
                             <constraint firstItem="PIX-TU-bKO" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="Bsg-KC-h7W"/>
@@ -125,6 +137,7 @@
                             <constraint firstItem="sDf-Gg-jgq" firstAttribute="bottom" secondItem="JDp-Ea-WOC" secondAttribute="bottom" id="LUh-yI-4j4"/>
                             <constraint firstItem="JDp-Ea-WOC" firstAttribute="top" secondItem="IOU-GU-TBd" secondAttribute="bottom" constant="97" id="ONC-1z-lvv"/>
                             <constraint firstItem="IOU-GU-TBd" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="117" id="OcO-lN-6rb"/>
+                            <constraint firstItem="Np3-XN-pz1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P8y-9S-lBL"/>
                             <constraint firstItem="IOU-GU-TBd" firstAttribute="top" secondItem="kUK-dL-54r" secondAttribute="bottom" constant="27" id="RaG-aS-kfd"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="IOU-GU-TBd" secondAttribute="trailing" constant="80" id="SBn-a0-sgg"/>
                             <constraint firstItem="x2O-px-D7v" firstAttribute="centerY" secondItem="IOU-GU-TBd" secondAttribute="centerY" id="TVB-OP-dQ2"/>
@@ -145,6 +158,7 @@
                         <outlet property="labelCurrentLocationName" destination="kUK-dL-54r" id="7qS-S6-7gv"/>
                         <outlet property="labelCurrentLocationTemp" destination="IOU-GU-TBd" id="ctU-2h-ljs"/>
                         <outlet property="progressLayout" destination="D3f-5U-zzw" id="NYQ-mc-hIr"/>
+                        <outlet property="searchBar" destination="Np3-XN-pz1" id="tC9-IS-V3W"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -96,7 +96,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredFavoritesList = favoritesList
         if searchText.isEmpty == false {
-            filteredFavoritesList = favoritesList.filter({($0.name?.lowercased().contains(searchText.lowercased()))!})
+            filteredFavoritesList = favoritesList.filter({
+                ($0.name?.lowercased().contains(searchText.lowercased()))!
+            })
         }
         favoritesTableView.reloadData()
     }

@@ -97,7 +97,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
         filteredFavoritesList = favoritesList
         if searchText.isEmpty == false {
             filteredFavoritesList = favoritesList.filter({
-                ($0.name?.lowercased().contains(searchText.lowercased()))!
+                ($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
             })
         }
         favoritesTableView.reloadData()

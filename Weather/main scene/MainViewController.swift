@@ -21,6 +21,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     private let locationManager = LocationManager()
     var favoritesList: [WeatherResponse] = []
     var filteredFavoritesList: [WeatherResponse] = []
+    var model: WeatherResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,9 +51,9 @@ class MainViewController: UIViewController , MainViewDelegate {
     func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
         self.progressLayout.isHidden = true
         self.labelCurrentLocationName.text = modelResponse[0].name
-        let temperature = String(describing: modelResponse[0].main?.value(forKey: "temp") ?? "")
-        let tempValue = (temperature as NSString).integerValue
-        self.labelCurrentLocationTemp.text = "\(tempValue)°"
+        if let tempDouble = modelResponse[0].main?.value(forKey: "temp") as? Double {
+            self.labelCurrentLocationTemp.text = "\(tempDouble.removeDecimal())"+"°"
+        }
         if let iconCode: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
             imgCurrentWeatherIcon.imageFromIconCode(iconCode: iconCode)
         }
@@ -112,5 +113,16 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
         }
         favoritesTableView.reloadData()
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        model = favoritesList[indexPath.row]
+        performSegue(withIdentifier: "segue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destionation = segue.destination as? DetailViewController {
+            destionation.model = model
+            favoritesTableView.deselectRow(at: favoritesTableView.indexPathForSelectedRow!, animated: true)
+        }
+    }
 }

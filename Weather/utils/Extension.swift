@@ -25,4 +25,11 @@ extension UIImageView {
         }).resume()
     }}
 
+extension Double {
+    public func removeDecimal() -> Int {
+        let temperatureWithDecimals = String(self)
+        let temperatureInt = (temperatureWithDecimals as NSString).integerValue
+        return temperatureInt
+    }
+}
 

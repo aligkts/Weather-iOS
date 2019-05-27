@@ -21,6 +21,8 @@ class MainViewController: UIViewController , MainViewDelegate {
     private let locationManager = LocationManager()
     var favoritesList: [WeatherResponse] = []
     var filteredFavoritesList: [WeatherResponse] = []
+    var latitude: Double?
+    var longitude: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,5 +114,17 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
         }
         favoritesTableView.reloadData()
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        latitude = favoritesList[indexPath.row].coord?.value(forKey: "lat") as? Double
+        longitude = favoritesList[indexPath.row].coord?.value(forKey: "lon") as? Double
+        performSegue(withIdentifier: "segue", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destionation = segue.destination as? DetailViewController {
+            destionation.latitude = latitude
+            destionation.longitude = longitude
+        }
+    }
 }

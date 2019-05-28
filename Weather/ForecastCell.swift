@@ -16,7 +16,7 @@ class ForecastCell: UITableViewCell {
     
     func setWeatherItem(item: List) {
         if let tempDouble = item.main?.temp {
-            labelItemTemperature.text = "\(tempDouble.removeDecimal())"+"°"
+            labelItemTemperature.text = "\(tempDouble.removeDecimal())" + "°"
         }
         if let iconCode: String = item.weather?.first?.icon {
             imgItemIcon.imageFromIconCode(iconCode: iconCode)

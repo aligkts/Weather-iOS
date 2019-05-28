@@ -43,7 +43,7 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
         guard let clickedTemperature = self.model?.main?.temp else {
             return
         }
-        labelLocationTemperature.text = "\(clickedTemperature.removeDecimal())"+"°"
+        labelLocationTemperature.text = "\(clickedTemperature.removeDecimal())" + "°"
         guard let clickedName = self.model?.name else {
             return
         }

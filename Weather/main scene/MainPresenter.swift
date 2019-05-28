@@ -13,7 +13,6 @@ class MainPresenter {
     
     weak private var mainViewDelegate : MainViewDelegate?
     var favoriteLocationList = [FavoriteLocationEntity]()
-    
 
     func setViewDelegate(mainViewDelegate:MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
@@ -25,14 +24,13 @@ class MainPresenter {
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
-                do
-                {
+                do {
                     if let dataResponse = data {
                         let model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
                         self.mainViewDelegate?.setCurrentUiComponents(modelResponse: model)
                     }
                 }
-                catch let error{
+                catch let error {
                     print("Json Parse Error : \(error)")
                 }
             }
@@ -53,14 +51,12 @@ class MainPresenter {
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
-                do
-                {
+                do {
                     if let dataResponse = data {
                         let model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
                         self.mainViewDelegate?.addModelToList(model: model)
                     }
-                }
-                catch let error{
+                } catch let error {
                     print("Json Parse Error : \(error)")
                 }
             }

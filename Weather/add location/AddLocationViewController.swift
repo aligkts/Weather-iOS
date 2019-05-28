@@ -14,6 +14,7 @@ class AddLocationViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     
     override func viewDidLoad() {
+        self.title = "Lokasyon Ekleme"
         addMarkersToMapFromCoreData()
     }
     

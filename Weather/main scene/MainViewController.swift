@@ -25,6 +25,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Weather"
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
@@ -70,9 +71,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     private func navigateToPermissionDenied () {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else {
-            return
-        }
+        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else { return }
         present(mainNavigationVC,animated: true, completion: nil)
     }
     
@@ -88,10 +87,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let favoriteItem = filteredFavoritesList[indexPath.row]
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as? WeatherCell else { return UITableViewCell() }
-            cell.setWeatherItem(item: favoriteItem)
-            return cell
+        let favoriteItem = filteredFavoritesList[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as? WeatherCell else { return UITableViewCell() }
+        cell.setWeatherItem(item: favoriteItem)
+        return cell
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

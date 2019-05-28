@@ -17,10 +17,13 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
     @IBOutlet weak var labelHumidity: UILabel!
     @IBOutlet weak var labelRainPossibility: UILabel!
     @IBOutlet weak var labelWind: UILabel!
+    @IBOutlet weak var detailTableView: UITableView!
     private let detailPresenter = DetailPresenter()
     var model: WeatherResponse?
-    
+    private var forecastList: [ListResponse] = []
+
     override func viewDidLoad() {
+        self.title = "Lokasyon Detay"
         detailPresenter.setViewDelegate(detailViewDelegate: self)
         guard let clickedLatitude = self.model?.coord?.value(forKey: "lat") as? Double else {
             return
@@ -59,8 +62,27 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
         labelWind.text = "\(windSpeed.removeDecimal())"
     }
     
-    func setUiComponents(modelResponse: ForecastResponse) {
-        //forecast request result for clicked item
+    func setUiComponents(listOfDays: [ListResponse]) {
+        forecastList = listOfDays
+        detailTableView.reloadData()
+    }
+}
+
+extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return forecastList.count
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let item = forecastList[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ForecastCell") as? ForecastCell else { return UITableViewCell() }
+        cell.setWeatherItem(item: item)
+        return cell
     }
     
 }
+

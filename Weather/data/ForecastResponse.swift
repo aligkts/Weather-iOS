@@ -8,28 +8,20 @@
 
 import Foundation
 
-struct ForecastResponse {
+struct ForecastResponse : Decodable {
     
     let cod : String?
     let message : Double?
     let cnt : Int?
-    let list : [NSDictionary]?
-    let city : NSDictionary?
+    let list : [List]?
+    let city : City?
     
-    enum CodingKeys: String, CodingKey {
-        case cod = "cod"
-        case message = "message"
-        case cnt = "cnt"
-        case list = "list"
-        case city = "city"
-    }
-    
-    init(resultModel: NSDictionary) {
-        self.cod = resultModel.value(forKey: "cod") as? String
-        self.message = resultModel.value(forKey: "message") as? Double
-        self.cnt = resultModel.value(forKey: "cnt") as? Int
-        self.list = resultModel.value(forKey: "list") as? [NSDictionary]
-        self.city = resultModel.value(forKey: "city") as? NSDictionary
+    init(resultModel: ForecastResponse) {
+        self.cod = resultModel.cod
+        self.message = resultModel.message
+        self.cnt = resultModel.cnt
+        self.list = resultModel.list
+        self.city = resultModel.city
     }
 
 }

@@ -16,10 +16,12 @@ class WeatherCell: UITableViewCell {
  
     func setWeatherItem(item: WeatherResponse) {
         txtItemName.text = item.name
-        let temperatureValue = Int(item.main?.value(forKey: "temp") as! Double)
-        txtItemTemperature.text = String(temperatureValue)+"°"
-        if let iconCode: String = item.weather?.first?.value(forKey: "icon") as? String {
-            imgItemIcon.imageFromIconCode(iconCode: iconCode)
+        if let temp = item.main?.temp {
+            let temperatureValue = Int(temp)
+            txtItemTemperature.text = String(temperatureValue) + "°"
+            if let iconCode: String = item.weather?.first?.icon {
+                imgItemIcon.imageFromIconCode(iconCode: iconCode)
+            }
         }
     }
 

@@ -13,7 +13,6 @@ class MainPresenter {
     
     weak private var mainViewDelegate : MainViewDelegate?
     var favoriteLocationList = [FavoriteLocationEntity]()
-    
 
     func setViewDelegate(mainViewDelegate:MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
@@ -21,17 +20,19 @@ class MainPresenter {
     
     func makeApiRequest(latitude: Double, longitude: Double) {
         guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        var weatherArray: [WeatherResponse] = []
         TaskManager.shared.dataTask(with: url) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
-                if let dataResponse = data,
-                let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
-                let weatherModel = WeatherResponse(resultModel: json)
-                    weatherArray.append(weatherModel)
+                do {
+                    if let dataResponse = data {
+                        let model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
+                        self.mainViewDelegate?.setCurrentUiComponents(modelResponse: model)
+                    }
                 }
-                self.mainViewDelegate?.setCurrentUiComponents(modelResponse: weatherArray)
+                catch let error {
+                    print("Json Parse Error : \(error)")
+                }
             }
         }
     }
@@ -50,10 +51,13 @@ class MainPresenter {
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
-                if let dataResponse = data,
-                    let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
-                    let weatherModel = WeatherResponse(resultModel: json)
-                    self.mainViewDelegate?.addModelToList(model: weatherModel)
+                do {
+                    if let dataResponse = data {
+                        let model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
+                        self.mainViewDelegate?.addModelToList(model: model)
+                    }
+                } catch let error {
+                    print("Json Parse Error : \(error)")
                 }
             }
         }

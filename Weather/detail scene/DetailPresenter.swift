@@ -12,7 +12,7 @@ import MapKit
 class DetailPresenter {
     
     weak private var detailViewDelegate : DetailViewDelegate?
-    private var listForDays: [ListResponse] = []
+    private var listForDays: [List] = []
     
     func setViewDelegate(detailViewDelegate:DetailViewDelegate?) {
         self.detailViewDelegate = detailViewDelegate
@@ -24,15 +24,18 @@ class DetailPresenter {
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
-                if let dataResponse = data,
-                    let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
-                    let forecastModel = ForecastResponse(resultModel: json)
-                    if let list = forecastModel.list {
-                        for index in stride(from: 1, to: list.count, by: 8) {
-                            let listModel = ListResponse(resultModel: list[index])
-                            self.listForDays.append(listModel)
+                do {
+                    if let dataResponse = data {
+                        let model = try JSONDecoder().decode(ForecastResponse.self, from: dataResponse)
+                        if let list = model.list {
+                            for index in stride(from: 1, to: list.count, by: 8) {
+                                let listModel = List(resultModel: list[index])
+                                self.listForDays.append(listModel)
+                            }
                         }
                     }
+                } catch let error {
+                    print("Json Parse Error : \(error)")
                 }
             }
             self.detailViewDelegate?.setUiComponents(listOfDays: self.listForDays)

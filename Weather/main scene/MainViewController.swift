@@ -49,13 +49,13 @@ class MainViewController: UIViewController , MainViewDelegate {
         mainPresenter.makeApiRequest(latitude: latitude, longitude: longitude)
     }
     
-    func setCurrentUiComponents(modelResponse: [WeatherResponse]) {
+    func setCurrentUiComponents(modelResponse: WeatherResponse) {
         self.progressLayout.isHidden = true
-        self.labelCurrentLocationName.text = modelResponse[0].name
-        if let tempDouble = modelResponse[0].main?.value(forKey: "temp") as? Double {
+        self.labelCurrentLocationName.text = modelResponse.name
+        if let tempDouble = modelResponse.main?.temp {
             self.labelCurrentLocationTemp.text = "\(tempDouble.removeDecimal())"+"°"
         }
-        if let iconCode: String = modelResponse[0].weather?.first?.value(forKey: "icon") as? String {
+        if let iconCode: String = modelResponse.weather?.first?.icon {
             imgCurrentWeatherIcon.imageFromIconCode(iconCode: iconCode)
         }
     }

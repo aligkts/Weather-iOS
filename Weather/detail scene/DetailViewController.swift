@@ -20,15 +20,15 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
     @IBOutlet weak var detailTableView: UITableView!
     private let detailPresenter = DetailPresenter()
     var model: WeatherResponse?
-    private var forecastList: [ListResponse] = []
+    private var forecastList: [List] = []
 
     override func viewDidLoad() {
         self.title = "Lokasyon Detay"
         detailPresenter.setViewDelegate(detailViewDelegate: self)
-        guard let clickedLatitude = self.model?.coord?.value(forKey: "lat") as? Double else {
+        guard let clickedLatitude = self.model?.coord?.lat else {
             return
         }
-        guard let clickedLongitude = self.model?.coord?.value(forKey: "lon") as? Double else {
+        guard let clickedLongitude = self.model?.coord?.lon else {
             return
         }
         setHeader()
@@ -36,33 +36,33 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
     }
     
     func setHeader() {
-        guard let iconCode = self.model?.weather?.first?.value(forKey: "icon") as? String else {
+        guard let iconCode = self.model?.weather?.first?.icon else {
             return
         }
         imgLocationIcon.imageFromIconCode(iconCode: iconCode)
-        guard let clickedTemperature = self.model?.main?.value(forKey: "temp") as? Double else {
+        guard let clickedTemperature = self.model?.main?.temp else {
             return
         }
-        labelLocationTemperature.text = "\(clickedTemperature.removeDecimal())"+"°"
+        labelLocationTemperature.text = "\(clickedTemperature.removeDecimal())" + "°"
         guard let clickedName = self.model?.name else {
             return
         }
         labelLocationName.text = clickedName
-        guard let humidity = self.model?.main?.value(forKey: "humidity") as? Int else {
+        guard let humidity = self.model?.main?.humidity else {
             return
         }
         labelHumidity.text = String(humidity)
-        guard let rainPossibility = self.model?.clouds?.value(forKey: "all") as? Int else {
+        guard let rainPossibility = self.model?.clouds?.all else {
             return
         }
         labelRainPossibility.text = String(rainPossibility)
-        guard let windSpeed = self.model?.wind?.value(forKey: "speed") as? Double else {
+        guard let windSpeed = self.model?.wind?.speed else {
             return
         }
         labelWind.text = "\(windSpeed.removeDecimal())"
     }
     
-    func setUiComponents(listOfDays: [ListResponse]) {
+    func setUiComponents(listOfDays: [List]) {
         forecastList = listOfDays
         detailTableView.reloadData()
     }

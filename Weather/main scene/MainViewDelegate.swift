@@ -12,7 +12,7 @@ protocol MainViewDelegate: NSObjectProtocol {
     
     func foundCurrentLocation(latitude: (Double),longitude: (Double))
     func permissionDenied()
-    func setCurrentUiComponents(modelResponse: [WeatherResponse])
+    func setCurrentUiComponents(modelResponse: WeatherResponse)
     func addModelToList(model: WeatherResponse)
 
 }

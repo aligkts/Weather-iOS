@@ -24,8 +24,7 @@ class DetailPresenter {
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
-                do
-                {
+                do {
                     if let dataResponse = data {
                         let model = try JSONDecoder().decode(ForecastResponse.self, from: dataResponse)
                         if let list = model.list {
@@ -35,8 +34,7 @@ class DetailPresenter {
                             }
                         }
                     }
-                }
-                catch let error{
+                } catch let error {
                     print("Json Parse Error : \(error)")
                 }
             }

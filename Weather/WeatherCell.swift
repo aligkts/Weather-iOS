@@ -18,7 +18,7 @@ class WeatherCell: UITableViewCell {
         txtItemName.text = item.name
         if let temp = item.main?.temp {
             let temperatureValue = Int(temp)
-            txtItemTemperature.text = String(temperatureValue)+"°"
+            txtItemTemperature.text = String(temperatureValue) + "°"
             if let iconCode: String = item.weather?.first?.icon {
                 imgItemIcon.imageFromIconCode(iconCode: iconCode)
             }

@@ -10,6 +10,6 @@ import Foundation
 
 protocol DetailViewDelegate: NSObjectProtocol {
     
-    func setUiComponents(listOfDays: [ListResponse])
+    func setUiComponents(listOfDays: [List])
     
 }

@@ -25,6 +25,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Weather"
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
@@ -70,9 +71,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     
     private func navigateToPermissionDenied () {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
-        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else {
-            return
-        }
+        guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else { return }
         present(mainNavigationVC,animated: true, completion: nil)
     }
     

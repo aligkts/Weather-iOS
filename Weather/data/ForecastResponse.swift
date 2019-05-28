@@ -31,5 +31,5 @@ struct ForecastResponse {
         self.list = resultModel.value(forKey: "list") as? [NSDictionary]
         self.city = resultModel.value(forKey: "city") as? NSDictionary
     }
-    
+
 }

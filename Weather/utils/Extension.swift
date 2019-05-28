@@ -33,3 +33,17 @@ extension Double {
     }
 }
 
+extension String {
+    func toDayName() -> String? {
+        let inputDateFormatter = DateFormatter()
+        inputDateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let inputDate = inputDateFormatter.date(from: self)
+        let outputDateFormetter = DateFormatter()
+        outputDateFormetter.dateFormat = "EEEE"
+        if let inputDate = inputDate {
+            let day = outputDateFormetter.string(from: inputDate)
+            return day
+        }
+        return nil
+    }
+}

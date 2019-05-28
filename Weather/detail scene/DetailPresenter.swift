@@ -12,7 +12,7 @@ import MapKit
 class DetailPresenter {
     
     weak private var detailViewDelegate : DetailViewDelegate?
-    var favoriteLocationList = [FavoriteLocationEntity]()
+    private var listForDays: [ListResponse] = []
     
     func setViewDelegate(detailViewDelegate:DetailViewDelegate?) {
         self.detailViewDelegate = detailViewDelegate
@@ -27,7 +27,13 @@ class DetailPresenter {
                 if let dataResponse = data,
                     let json = try? JSONSerialization.jsonObject(with: dataResponse, options: []) as? NSDictionary {
                     let forecastModel = ForecastResponse(resultModel: json)
-                    self.detailViewDelegate?.setUiComponents(modelResponse: forecastModel)
+                    if let list = forecastModel.list {
+                        for index in stride(from: 1, to: list.count, by: 8) {
+                            let listModel = ListResponse(resultModel: list[index])
+                            self.listForDays.append(listModel)
+                        }
+                        self.detailViewDelegate?.setUiComponents(listOfDays: self.listForDays)
+                    }
                 }
             }
         }

@@ -18,16 +18,21 @@ class TaskManager {
     func dataTask(with url: URL, completion: @escaping completionHandler) {
         if tasks.keys.contains(url) {
             tasks[url]?.append(completion)
+            setCompetion(url: url)
         } else {
             tasks[url] = [completion]
-            let _ = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
-                DispatchQueue.main.sync {
-                    guard let completionHandlers = self?.tasks[url] else { return }
-                    for handler in completionHandlers {
-                        handler(data, response, error)
-                    }
-                }
-            }).resume()
+            setCompetion(url: url)
         }
+    }
+    
+    func setCompetion(url: URL) {
+        let _ = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
+            DispatchQueue.main.sync {
+                guard let completionHandlers = self?.tasks[url] else { return }
+                for handler in completionHandlers {
+                    handler(data, response, error)
+                }
+            }
+        }).resume()
     }
 }

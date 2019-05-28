@@ -23,6 +23,7 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
     private var forecastList: [ListResponse] = []
 
     override func viewDidLoad() {
+        self.title = "Lokasyon Detay"
         detailPresenter.setViewDelegate(detailViewDelegate: self)
         guard let clickedLatitude = self.model?.coord?.value(forKey: "lat") as? Double else {
             return
@@ -32,7 +33,6 @@ class DetailViewController: UIViewController, DetailViewDelegate  {
         }
         setHeader()
         detailPresenter.makeForecastRequest(latitude: clickedLatitude, longitude: clickedLongitude)
-        self.title = "Lokasyon Detay"
     }
     
     func setHeader() {

@@ -87,10 +87,10 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-            let favoriteItem = filteredFavoritesList[indexPath.row]
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as? WeatherCell else { return UITableViewCell() }
-            cell.setWeatherItem(item: favoriteItem)
-            return cell
+        let favoriteItem = filteredFavoritesList[indexPath.row]
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell") as? WeatherCell else { return UITableViewCell() }
+        cell.setWeatherItem(item: favoriteItem)
+        return cell
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

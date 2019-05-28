@@ -32,10 +32,10 @@ class DetailPresenter {
                             let listModel = ListResponse(resultModel: list[index])
                             self.listForDays.append(listModel)
                         }
-                        self.detailViewDelegate?.setUiComponents(listOfDays: self.listForDays)
                     }
                 }
             }
+            self.detailViewDelegate?.setUiComponents(listOfDays: self.listForDays)
         }
     }
     

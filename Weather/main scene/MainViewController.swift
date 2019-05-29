@@ -37,14 +37,12 @@ class MainViewController: UIViewController , MainViewDelegate {
         mainPresenter.getResults()
     }
     
-    func addModelToList(model: WeatherResponse) {
-        favoritesList.append(model)
-        if favoritesList.count == mainPresenter.favoriteLocationList.count {
-            filteredFavoritesList = favoritesList
-            favoritesTableView.reloadData()
-        }
+    func setListToTableView(model: [WeatherResponse]) {
+        favoritesList = model
+        filteredFavoritesList = favoritesList
+        favoritesTableView.reloadData()
     }
-    
+
     func foundCurrentLocation(latitude: (Double), longitude: (Double)) {
         mainPresenter.makeApiRequest(latitude: latitude, longitude: longitude)
     }
@@ -108,7 +106,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
             favoritesList.remove(at: indexPath.row)
             filteredFavoritesList.remove(at: indexPath.row)
             PersistentService.deleteItem(row: indexPath.row)
-            mainPresenter.getResults()
         }
         favoritesTableView.reloadData()
     }

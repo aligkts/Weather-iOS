@@ -23,7 +23,8 @@ extension UIImageView {
                 self.image = image
             })
         }).resume()
-    }}
+    }
+}
 
 extension Double {
     public func removeDecimal() -> Int {

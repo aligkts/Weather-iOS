@@ -13,10 +13,11 @@ import MapKit
 class LocationManager: NSObject , CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
-    weak private var mainViewDelegate : MainViewDelegate?
+    weak private var mainViewDelegate: MainViewDelegate?
     
-    func setViewDelegate(mainViewDelegate:MainViewDelegate?){
+    func setViewDelegate(mainViewDelegate: MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
+        locationManager.delegate = self
     }
     
     @objc func checkLocationServices() {
@@ -29,7 +30,6 @@ class LocationManager: NSObject , CLLocationManagerDelegate {
                 == .notDetermined {
                 locationManager.requestWhenInUseAuthorization()
             }
-            locationManager.delegate = self as? CLLocationManagerDelegate
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             locationManager.startUpdatingLocation()
         } else {

@@ -21,7 +21,7 @@ class MainPresenter {
     
     func makeApiRequest(latitude: Double, longitude: Double) {
         guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        TaskManager.shared.dataTask(with: url) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url, uuid: nil) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
@@ -41,20 +41,21 @@ class MainPresenter {
         self.favoriteLocationList = PersistentService.fetchAll
         self.modelList.removeAll()
         for index in favoriteLocationList {
-            makeApiRequestForFavorites(latitude: index.latitude, longitude: index.longitude)
+            makeApiRequestForFavorites(latitude: index.latitude, longitude: index.longitude, id: index.id)
             //Can be better with using escaping closure
         }
     }
    
-    func makeApiRequestForFavorites(latitude: Double, longitude: Double) {
+    func makeApiRequestForFavorites(latitude: Double, longitude: Double, id: String) {
         guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        TaskManager.shared.dataTask(with: url) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url, uuid: id) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
                 do {
                     if let dataResponse = data {
-                        let model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
+                        var model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
+                        model.uuid = id
                         self.modelList.append(model)
                     }
                 } catch let error {

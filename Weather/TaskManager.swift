@@ -15,7 +15,7 @@ class TaskManager {
     typealias completionHandler = (Data?, URLResponse?, Error?) -> Void
     var tasks = [URL: [completionHandler]]()
 
-    func dataTask(with url: URL, completion: @escaping completionHandler) {
+    func dataTask(with url: URL, uuid: String?, completion: @escaping completionHandler) {
         tasks[url] = [completion]
         let _ = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
             DispatchQueue.main.sync {

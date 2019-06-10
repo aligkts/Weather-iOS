@@ -19,7 +19,7 @@ class DetailPresenter {
     
     func makeForecastRequest(latitude: Double, longitude: Double) {
         guard let url = URL(string: "\(Constants.baseUrl)forecast?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        TaskManager.shared.dataTask(with: url) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url, uuid: nil) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {

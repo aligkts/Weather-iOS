@@ -92,7 +92,9 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredFavoritesList = favoritesList
+        if searchText.isEmpty {
+            mainPresenter.getResults()
+        }
         if searchText.isEmpty == false {
             filteredFavoritesList = favoritesList.filter({
                 ($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
@@ -103,9 +105,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            favoritesList.remove(at: indexPath.row)
-            filteredFavoritesList.remove(at: indexPath.row)
-            PersistentService.deleteItem(row: indexPath.row)
+            if let id = filteredFavoritesList[indexPath.row].uuid {
+                PersistentService.deleteItem(id: id)
+                filteredFavoritesList.remove(at: indexPath.row)
+                if let text = searchBar.text {
+                    if text.isEmpty {
+                        favoritesList = filteredFavoritesList
+                    }
+                }
+            }
         }
         favoritesTableView.reloadData()
     }

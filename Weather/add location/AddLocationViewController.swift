@@ -20,8 +20,8 @@ class AddLocationViewController: UIViewController {
     
     func addMarkersToMapFromCoreData() {
         let favoritesList = PersistentService.fetchAll
-        for i in favoritesList {
-            addMarkerToMap(latitude: i.latitude, longitude: i.longitude)
+        for index in favoritesList {
+            addMarkerToMap(latitude: index.latitude, longitude: index.longitude)
         }
     }
     
@@ -32,7 +32,8 @@ class AddLocationViewController: UIViewController {
         addMarkerToMap(latitude: coord.latitude, longitude: coord.longitude)
         let dialogMessage = UIAlertController(title: "Favoriler", message: "Bu lokasyonu eklemek istediğinize emin misiniz?", preferredStyle: .alert)
         let actionOk = UIAlertAction(title: "Evet", style: .default, handler: { (action) -> Void in
-            PersistentService.addEntityToCoreData(latitude: coord.latitude, longitude: coord.longitude)
+            let uuid = UUID().uuidString
+            PersistentService.addEntityToCoreData(latitude: coord.latitude, longitude: coord.longitude, id: uuid)
         })
         let actionCancel = UIAlertAction(title: "Hayır", style: .cancel) { (action) -> Void in
             self.removeMarkerFromMap(coord: coord)

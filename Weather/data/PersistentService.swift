@@ -55,7 +55,7 @@ class PersistentService {
         let favoriteLocationPoint = FavoriteLocationEntity(context: self.context)
         favoriteLocationPoint.latitude = latitude
         favoriteLocationPoint.longitude = longitude
-        PersistentService.saveContext()
+        self.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
     }
     

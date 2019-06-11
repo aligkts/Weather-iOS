@@ -40,14 +40,16 @@ class MainPresenter {
     func getResults() {
         self.favoriteLocationList = PersistentService.fetchAll
         self.modelList.removeAll()
-        for index in favoriteLocationList {
-            makeApiRequestForFavorites(latitude: index.latitude, longitude: index.longitude, id: index.id)
-            //Can be better with using escaping closure
+        for favoriteLocation in favoriteLocationList {
+            makeApiRequestFor(favoriteLocation: favoriteLocation)
         }
     }
    
-    func makeApiRequestForFavorites(latitude: Double, longitude: Double, id: String) {
-        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
+    func makeApiRequestFor(favoriteLocation: FavoriteLocationEntity) {
+        let id: String = favoriteLocation.id
+        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(favoriteLocation.latitude)&lon=\(favoriteLocation.longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else {
+                return
+        }
         TaskManager.shared.dataTask(with: url, uuid: id) { (data, _, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
@@ -56,6 +58,7 @@ class MainPresenter {
                     if let dataResponse = data {
                         var model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
                         model.uuid = id
+                        model.favoriteLocation = favoriteLocation
                         self.modelList.append(model)
                     }
                 } catch let error {

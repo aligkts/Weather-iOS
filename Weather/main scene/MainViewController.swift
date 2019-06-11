@@ -76,6 +76,7 @@ class MainViewController: UIViewController, MainViewDelegate {
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return filteredFavoritesList.count
     }
@@ -92,28 +93,26 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText.isEmpty {
-            mainPresenter.getResults()
-        }
         if searchText.isEmpty == false {
             filteredFavoritesList = favoritesList.filter({
                 ($0.name?.lowercased().contains(searchText.lowercased()) ?? false)
             })
+        } else {
+            filteredFavoritesList = favoritesList
         }
         favoritesTableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            if let id = filteredFavoritesList[indexPath.row].uuid {
-                PersistentService.deleteItem(id: id)
-                filteredFavoritesList.remove(at: indexPath.row)
-                if let text = searchBar.text {
-                    if text.isEmpty {
-                        favoritesList = filteredFavoritesList
-                    }
-                }
+            let weatherResponse: WeatherResponse = filteredFavoritesList[indexPath.row]
+            if let favoriteLocation = weatherResponse.favoriteLocation {
+                PersistentService.deleteItem(location: favoriteLocation)
             }
+            favoritesList.removeAll { (testResponse: WeatherResponse) -> Bool in
+                return (testResponse == weatherResponse)
+            }
+            filteredFavoritesList.remove(at: indexPath.row)
         }
         favoritesTableView.reloadData()
     }

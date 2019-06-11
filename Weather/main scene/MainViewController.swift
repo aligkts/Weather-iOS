@@ -8,10 +8,10 @@
 
 import UIKit
 
-class MainViewController: UIViewController , MainViewDelegate {
+class MainViewController: UIViewController, MainViewDelegate {
     
     @IBOutlet weak var progressLayout: UIView!
-    @IBOutlet weak var labelCurrentLocationName:UILabel!
+    @IBOutlet weak var labelCurrentLocationName: UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
     @IBOutlet weak var btnAddLocation: UIButton!
@@ -70,7 +70,7 @@ class MainViewController: UIViewController , MainViewDelegate {
     private func navigateToPermissionDenied () {
         let mainStoryboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else { return }
-        present(mainNavigationVC,animated: true, completion: nil)
+        present(mainNavigationVC, animated: true, completion: nil)
     }
     
 }

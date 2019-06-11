@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension FavoriteLocationEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<FavoriteLocationEntity> {

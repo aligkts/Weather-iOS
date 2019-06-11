@@ -12,12 +12,12 @@ class TaskManager {
     
     static let shared = TaskManager()
     let session = URLSession(configuration: .default)
-    typealias completionHandler = (Data?, URLResponse?, Error?) -> Void
-    var tasks = [URL: [completionHandler]]()
+    typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
+    var tasks = [URL: [CompletionHandler]]()
 
-    func dataTask(with url: URL, uuid: String?, completion: @escaping completionHandler) {
+    func dataTask(with url: URL, uuid: String?, completion: @escaping CompletionHandler) {
         tasks[url] = [completion]
-        let _ = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
+        _ = session.dataTask(with: url, completionHandler: { [weak self] (data, response, error) in
             DispatchQueue.main.sync {
                 guard let completionHandlers = self?.tasks[url] else { return }
                 for handler in completionHandlers {

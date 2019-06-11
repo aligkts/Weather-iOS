@@ -8,15 +8,15 @@
 
 import Foundation
 
-struct List : Decodable {
+struct List: Decodable {
     
-    let dt : Int?
-    let main : Main?
-    let weather : [Weather]?
-    let clouds : Clouds?
-    let wind : Wind?
-    let sys : Sys?
-    let dt_txt : String?
+    let dt: Int?
+    let main: Main?
+    let weather: [Weather]?
+    let clouds: Clouds?
+    let wind: Wind?
+    let sys: Sys?
+    let dt_txt: String?
     
     init(resultModel: List) {
         self.dt = resultModel.dt
@@ -29,4 +29,3 @@ struct List : Decodable {
     }
     
 }
-

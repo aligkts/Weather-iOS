@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct ForecastResponse : Decodable {
+struct ForecastResponse: Decodable {
     
-    let cod : String?
-    let message : Double?
-    let cnt : Int?
-    let list : [List]?
-    let city : City?
+    let cod: String?
+    let message: Double?
+    let cnt: Int?
+    let list: [List]?
+    let city: City?
     
     init(resultModel: ForecastResponse) {
         self.cod = resultModel.cod

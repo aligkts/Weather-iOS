@@ -11,17 +11,17 @@ import MapKit
 
 class MainPresenter {
     
-    weak private var mainViewDelegate : MainViewDelegate?
+    weak private var mainViewDelegate: MainViewDelegate?
     var favoriteLocationList = [FavoriteLocationEntity]()
     var modelList: [WeatherResponse] = []
 
-    func setViewDelegate(mainViewDelegate:MainViewDelegate?) {
+    func setViewDelegate(mainViewDelegate: MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
     }
     
     func makeApiRequest(latitude: Double, longitude: Double) {
         guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        TaskManager.shared.dataTask(with: url, uuid: nil) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url, uuid: nil) { (data, _, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {
@@ -48,7 +48,7 @@ class MainPresenter {
    
     func makeApiRequestForFavorites(latitude: Double, longitude: Double, id: String) {
         guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        TaskManager.shared.dataTask(with: url, uuid: id) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url, uuid: id) { (data, _, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {

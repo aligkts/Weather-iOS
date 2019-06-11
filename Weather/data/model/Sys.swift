@@ -6,9 +6,9 @@
 //  Copyright © 2019 adesso. All rights reserved.
 //
 
-struct Sys : Decodable {
-    var message : Double?
-    var country : String?
-    var sunrise : Int?
-    var sunset : Int?
+struct Sys: Decodable {
+    var message: Double?
+    var country: String?
+    var sunrise: Int?
+    var sunset: Int?
 }

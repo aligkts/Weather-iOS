@@ -31,11 +31,11 @@ class AddLocationViewController: UIViewController {
         let coord: CLLocationCoordinate2D = mapView.convert(touchPoint, toCoordinateFrom: mapView)
         addMarkerToMap(latitude: coord.latitude, longitude: coord.longitude)
         let dialogMessage = UIAlertController(title: "Favoriler", message: "Bu lokasyonu eklemek istediğinize emin misiniz?", preferredStyle: .alert)
-        let actionOk = UIAlertAction(title: "Evet", style: .default, handler: { (action) -> Void in
+        let actionOk = UIAlertAction(title: "Evet", style: .default, handler: { (_) -> Void in
             let uuid = UUID().uuidString
             PersistentService.addEntityToCoreData(latitude: coord.latitude, longitude: coord.longitude, id: uuid)
         })
-        let actionCancel = UIAlertAction(title: "Hayır", style: .cancel) { (action) -> Void in
+        let actionCancel = UIAlertAction(title: "Hayır", style: .cancel) { (_) -> Void in
             self.removeMarkerFromMap(coord: coord)
         }
         dialogMessage.addAction(actionOk)
@@ -54,7 +54,7 @@ class AddLocationViewController: UIViewController {
     func removeMarkerFromMap(coord: CLLocationCoordinate2D) {
         let allAnnotations = self.mapView.annotations
         for eachAnnotation in allAnnotations {
-            if eachAnnotation.coordinate.latitude == coord.latitude || eachAnnotation.coordinate.longitude == coord.longitude{
+            if eachAnnotation.coordinate.latitude == coord.latitude || eachAnnotation.coordinate.longitude == coord.longitude {
                 self.mapView.removeAnnotation(eachAnnotation)
             }
         }

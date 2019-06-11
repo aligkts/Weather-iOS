@@ -14,7 +14,7 @@ class LocationManagerTest: XCTestCase {
     
     var locationHelper: LocationManager!
     var locationMgr: CLLocationManager!
-    weak private var fakeDelegate : MainViewDelegate?
+    weak private var fakeDelegate: MainViewDelegate?
 
     override func setUp() {
         super.setUp()
@@ -44,12 +44,14 @@ class LocationManagerTest: XCTestCase {
         let fakeLocationManager = FakeLocationManager()
         locationHelper = LocationManager()
         locationHelper.setViewDelegate(mainViewDelegate: self.fakeDelegate)
-        locationHelper.locationManager.delegate!.locationManager?(fakeLocationManager, didChangeAuthorization: .authorizedWhenInUse)
+        locationHelper.locationManager
+            .delegate!
+            .locationManager?(fakeLocationManager, didChangeAuthorization: .authorizedWhenInUse)
     }
     
     func testWhenStatusDenied() {
         class FakeLocationManager: CLLocationManager {
-            
+
         }
         let fakeLocationManager = FakeLocationManager()
         locationHelper = LocationManager()

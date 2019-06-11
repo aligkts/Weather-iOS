@@ -6,7 +6,7 @@
 //  Copyright © 2019 adesso. All rights reserved.
 //
 
-struct City : Decodable {
-    var id : Int?
-    var name : String?
+struct City: Decodable {
+    var id: Int?
+    var name: String?
 }

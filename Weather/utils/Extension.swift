@@ -13,7 +13,7 @@ extension UIImageView {
         let url = "\(Constants.API_IMAGE_BASE_URL)\(iconCode).png"
         self.image = nil
         let urlStringNew = url.replacingOccurrences(of: " ", with: "%20")
-        URLSession.shared.dataTask(with: NSURL(string: urlStringNew)! as URL, completionHandler: { (data, response, error) -> Void in
+        URLSession.shared.dataTask(with: NSURL(string: urlStringNew)! as URL, completionHandler: { (data, _, error) -> Void in
             if error != nil {
                 print(error as Any)
                 return

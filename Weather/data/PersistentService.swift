@@ -44,15 +44,9 @@ class PersistentService {
         return container
     }()
     
-    static func deleteItem(id: String) {
-        var bookmarkList = PersistentService.fetchAll
-        for index in stride(from: 0, to: bookmarkList.count, by: 1) {
-           let cell = bookmarkList[index]
-           if cell.id == id {
-                self.context.delete(cell)
-                self.saveContext()
-            }
-        }
+    static func deleteItem(location: FavoriteLocationEntity) {
+        self.context.delete(location)
+        self.saveContext()
     }
     
     static func addEntityToCoreData(latitude: Double, longitude: Double, id: String) {

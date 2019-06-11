@@ -94,7 +94,7 @@
 		48BE75F8228D193900A2AD65 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
 		48BE75FA228D1A7400A2AD65 /* PermissionDeniedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionDeniedViewController.swift; sourceTree = "<group>"; };
 		48BE760E228D3FB800A2AD65 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		48BE7617228D462900A2AD65 /* WeatherResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherResponse.swift; path = ../../../../Downloads/codegen_5cdd0e72bb489/WeatherResponse.swift; sourceTree = "<group>"; };
+		48BE7617228D462900A2AD65 /* WeatherResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherResponse.swift; sourceTree = "<group>"; };
 		48E232AF229282FC005B3C2B /* AddLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		48E232B82292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteLocationEntity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		48E232B92292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FavoriteLocationEntity+CoreDataProperties.swift"; sourceTree = "<group>"; };

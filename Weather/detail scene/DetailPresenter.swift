@@ -10,16 +10,16 @@ import Foundation
 
 class DetailPresenter {
     
-    weak private var detailViewDelegate : DetailViewDelegate?
+    weak private var detailViewDelegate: DetailViewDelegate?
     private var listForDays: [List] = []
     
-    func setViewDelegate(detailViewDelegate:DetailViewDelegate?) {
+    func setViewDelegate(detailViewDelegate: DetailViewDelegate?) {
         self.detailViewDelegate = detailViewDelegate
     }
     
     func makeForecastRequest(latitude: Double, longitude: Double) {
         guard let url = URL(string: "\(Constants.baseUrl)forecast?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
-        TaskManager.shared.dataTask(with: url) { (data, response, error) in
+        TaskManager.shared.dataTask(with: url, uuid: nil) { (data, _, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
             } else {

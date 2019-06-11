@@ -6,7 +6,7 @@
 //  Copyright © 2019 adesso. All rights reserved.
 //
 
-struct Wind : Decodable {
-    var speed : Double?
-    var deg : Double?
+struct Wind: Decodable {
+    var speed: Double?
+    var deg: Double?
 }

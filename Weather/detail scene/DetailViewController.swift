@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class DetailViewController: UIViewController, DetailViewDelegate  {
+class DetailViewController: UIViewController, DetailViewDelegate {
    
     @IBOutlet weak var labelLocationName: UILabel!
     @IBOutlet weak var labelLocationTemperature: UILabel!
@@ -85,4 +85,3 @@ extension DetailViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
-

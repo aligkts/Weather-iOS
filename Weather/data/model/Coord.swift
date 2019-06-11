@@ -6,7 +6,7 @@
 //  Copyright © 2019 adesso. All rights reserved.
 //
 
-struct Coord : Decodable {
-    var lon : Double?
-    var lat : Double?
+struct Coord: Decodable {
+    var lon: Double?
+    var lat: Double?
 }

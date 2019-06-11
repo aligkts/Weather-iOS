@@ -6,6 +6,6 @@
 //  Copyright © 2019 adesso. All rights reserved.
 //
 
-struct Clouds : Decodable {
-    var all : Int?
+struct Clouds: Decodable {
+    var all: Int?
 }

@@ -10,7 +10,6 @@
 import Foundation
 import CoreData
 
-
 extension FavoriteLocationEntity {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<FavoriteLocationEntity> {
@@ -19,5 +18,6 @@ extension FavoriteLocationEntity {
 
     @NSManaged public var latitude: Double
     @NSManaged public var longitude: Double
-
+    @NSManaged public var id: String
+    
 }

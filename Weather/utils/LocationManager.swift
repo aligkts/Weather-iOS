@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
-class LocationManager: NSObject , CLLocationManagerDelegate {
+class LocationManager: NSObject, CLLocationManagerDelegate {
 
     let locationManager = CLLocationManager()
     weak private var mainViewDelegate: MainViewDelegate?

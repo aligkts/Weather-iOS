@@ -6,9 +6,9 @@
 //  Copyright © 2019 adesso. All rights reserved.
 //
 
-struct Weather : Decodable {
-    var id : Int?
-    var main : String?
-    var description : String?
-    var icon : String?
+struct Weather: Decodable {
+    var id: Int?
+    var main: String?
+    var description: String?
+    var icon: String?
 }

@@ -25,7 +25,7 @@ class PersistentService {
          error conditions that could cause the creation of the store to fail.
          */
         let container = NSPersistentContainer(name: "Weather")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+        container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
@@ -44,17 +44,22 @@ class PersistentService {
         return container
     }()
     
-    static func deleteItem(row: Int) {
+    static func deleteItem(id: String) {
         var bookmarkList = PersistentService.fetchAll
-        let task = bookmarkList[row]
-        self.context.delete(task)
-        self.saveContext()
+        for index in stride(from: 0, to: bookmarkList.count, by: 1) {
+           let cell = bookmarkList[index]
+           if cell.id == id {
+                self.context.delete(cell)
+                self.saveContext()
+            }
+        }
     }
     
-    static func addEntityToCoreData(latitude: Double, longitude: Double) {
+    static func addEntityToCoreData(latitude: Double, longitude: Double, id: String) {
         let favoriteLocationPoint = FavoriteLocationEntity(context: self.context)
         favoriteLocationPoint.latitude = latitude
         favoriteLocationPoint.longitude = longitude
+        favoriteLocationPoint.id = id
         self.saveContext()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
     }

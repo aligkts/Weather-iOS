@@ -10,7 +10,7 @@ import UIKit
 
 extension UIImageView {
     public func imageFromIconCode(iconCode: String) {
-        let url = "\(Constants.API_IMAGE_BASE_URL)\(iconCode).png"
+        let url = "\(API.API_IMAGE_BASE_URL)\(iconCode).png"
         self.image = nil
         let urlStringNew = url.replacingOccurrences(of: " ", with: "%20")
         URLSession.shared.dataTask(with: NSURL(string: urlStringNew)! as URL, completionHandler: { (data, _, error) -> Void in

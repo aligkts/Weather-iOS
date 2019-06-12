@@ -21,7 +21,9 @@ class MainPresenter {
     }
     
     fileprivate func internalMakeApiRequest(latitude: Double, longitude: Double, nonErrorCallback: @escaping CompletionHandler) {
-        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else { return }
+        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else {
+            return
+        }
         TaskManager.shared.dataTask(with: url, uuid: nil) { (data, response, error) in
             if error != nil {
                 print(error?.localizedDescription ?? "Response Error")
@@ -44,6 +46,14 @@ class MainPresenter {
         }
     }
     
+    func getResults() {
+        self.favoriteLocationList = PersistentService.fetchAll
+        self.modelList.removeAll()
+        for favoriteLocation in favoriteLocationList {
+            makeApiRequestFor(favoriteLocation: favoriteLocation)
+        }
+    }
+    
     func makeApiRequestFor(favoriteLocation: FavoriteLocationEntity) {
         let id: String = favoriteLocation.id
         internalMakeApiRequest(latitude: favoriteLocation.latitude, longitude: favoriteLocation.longitude) { (data, _, error) in
@@ -60,14 +70,6 @@ class MainPresenter {
             if self.modelList.count == self.favoriteLocationList.count {
                 self.mainViewDelegate?.setListToTableView(model: self.modelList)
             }
-        }
-    }
-    
-    func getResults() {
-        self.favoriteLocationList = PersistentService.fetchAll
-        self.modelList.removeAll()
-        for favoriteLocation in favoriteLocationList {
-            makeApiRequestFor(favoriteLocation: favoriteLocation)
         }
     }
     

@@ -14,36 +14,32 @@ class MainPresenter {
     weak private var mainViewDelegate: MainViewDelegate?
     var favoriteLocationList = [FavoriteLocationEntity]()
     var modelList: [WeatherResponse] = []
-    typealias CompletionHandler = (Data?, URLResponse?, Error?) -> Void
+    var apiClient: ApiInteractor
+    
+    init() {
+        self.apiClient = ApiInteractor()
+    }
     
     func setViewDelegate(mainViewDelegate: MainViewDelegate?) {
         self.mainViewDelegate = mainViewDelegate
     }
     
-    fileprivate func internalMakeApiRequest(latitude: Double, longitude: Double, nonErrorCallback: @escaping CompletionHandler) {
-        guard let url = URL(string: "\(Constants.baseUrl)weather?lat=\(latitude)&lon=\(longitude)&&APPID=\(Constants.weatherAppId)&units=Metric&lang=tr") else {
-            return
-        }
-        TaskManager.shared.dataTask(with: url, uuid: nil) { (data, response, error) in
-            if error != nil {
-                print(error?.localizedDescription ?? "Response Error")
-            } else {
-                nonErrorCallback(data, response, error)
-            }
-        }
-    }
-    
     func makeApiRequest(latitude: Double, longitude: Double) {
-        internalMakeApiRequest(latitude: latitude, longitude: longitude) { (data, _, error) in
-            do {
-                if let dataResponse = data {
-                    let model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
-                    self.mainViewDelegate?.setCurrentUiComponents(modelResponse: model)
-                }
-            } catch let error {
-                print("Json Parse Error : \(error)")
-            }
-        }
+        apiClient.getWeatherByLatLng(latitude: latitude,
+                                     longitude: longitude,
+                                     unitType: "Metric",
+                                     language: "tr",
+                                     completionHandler: { responseData in
+                                        do {
+                                            let weather = try JSONDecoder().decode(WeatherResponse.self, from: responseData)
+                                            self.mainViewDelegate?.setCurrentUiComponents(modelResponse: weather)
+                                        } catch let error {
+                                            print("Json Parse Error : \(error)")
+                                        }
+                                    },
+                                    failureHandler: { error in
+                                        print("Weather Request Error : \(error)")
+                                    })
     }
     
     func getResults() {
@@ -56,21 +52,26 @@ class MainPresenter {
     
     func makeApiRequestFor(favoriteLocation: FavoriteLocationEntity) {
         let id: String = favoriteLocation.id
-        internalMakeApiRequest(latitude: favoriteLocation.latitude, longitude: favoriteLocation.longitude) { (data, _, error) in
-            do {
-                if let dataResponse = data {
-                    var model = try JSONDecoder().decode(WeatherResponse.self, from: dataResponse)
-                    model.uuid = id
-                    model.favoriteLocation = favoriteLocation
-                    self.modelList.append(model)
-                }
-            } catch let error {
-                print("Json Parse Error : \(error)")
-            }
-            if self.modelList.count == self.favoriteLocationList.count {
-                self.mainViewDelegate?.setListToTableView(model: self.modelList)
-            }
-        }
+        apiClient.getWeatherByLatLng(latitude: favoriteLocation.latitude,
+                                     longitude: favoriteLocation.longitude,
+                                     unitType: "Metric",
+                                     language: "tr",
+                                     completionHandler: { responseData in
+                                        do {
+                                            var weather = try JSONDecoder().decode(WeatherResponse.self, from: responseData)
+                                            weather.uuid = id
+                                            weather.favoriteLocation = favoriteLocation
+                                            self.modelList.append(weather)
+                                        } catch let error {
+                                            print("Json Parse Error : \(error)")
+                                        }
+                                        if self.modelList.count == self.favoriteLocationList.count {
+                                            self.mainViewDelegate?.setListToTableView(model: self.modelList)
+                                        }
+                                    },
+                                    failureHandler: { error in
+                                        print("Weather Request Error : \(error)")
+                                    })
     }
-    
+
 }

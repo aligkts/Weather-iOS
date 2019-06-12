@@ -32,7 +32,7 @@ class DetailViewController: UIViewController, DetailViewDelegate {
             return
         }
         setHeader()
-        //detailPresenter.makeForecastRequest(latitude: clickedLatitude, longitude: clickedLongitude)
+        detailPresenter.makeForecastRequest(latitude: clickedLatitude, longitude: clickedLongitude)
     }
     
     func setHeader() {

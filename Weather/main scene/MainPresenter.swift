@@ -36,9 +36,10 @@ class MainPresenter {
                                         } catch let error {
                                             print("Json Parse Error : \(error)")
                                         }
-                                    }) { error in
-                                        print(error)
-                                    }
+                                    },
+                                    failureHandler: { error in
+                                        print("Weather Request Error : \(error)")
+                                    })
     }
     
     func getResults() {
@@ -69,7 +70,7 @@ class MainPresenter {
                                         }
                                     },
                                     failureHandler: { error in
-                                        print("Request Error : \(error)")
+                                        print("Weather Request Error : \(error)")
                                     })
     }
 

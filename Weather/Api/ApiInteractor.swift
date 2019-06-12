@@ -21,15 +21,33 @@ class ApiInteractor {
                             completionHandler: @escaping ApiCompletionHandler,
                             failureHandler: @escaping ApiFailureHandler) {
         AF.request(API.baseUrl + API.WEATHER,
-                   parameters: ["lat": latitude, "lon": longitude, "APPID": API.weatherAppId, "units": unitType, "lang": language],
+                   parameters: ["lat": latitude, "lon": longitude, "APPID": API.WEATHER_APP_ID, "units": unitType, "lang": language],
                    encoding: URLEncoding.default).responseJSON { response in
-                   guard let data = response.data else { return }
-                    do {
-                        completionHandler(data)
-                    } catch let error {
-                        print(error)
+                        guard let data = response.data else { return }
+                        do {
+                            completionHandler(data)
+                        } catch let error {
+                            failureHandler(error)
+                        }
                     }
-        }
+    }
+    
+    func getForecastByLatLng(latitude: Double,
+                             longitude: Double,
+                             unitType: String,
+                             language: String,
+                             completionHandler: @escaping ApiCompletionHandler,
+                             failureHandler: @escaping ApiFailureHandler) {
+        AF.request(API.baseUrl + API.FORECAST,
+                   parameters: ["lat": latitude, "lon": longitude, "APPID": API.WEATHER_APP_ID, "units": unitType, "lang": language],
+                   encoding: URLEncoding.default).responseJSON { response in
+                        guard let data = response.data else { return }
+                        do {
+                            completionHandler(data)
+                        } catch let error {
+                            failureHandler(error)
+                        }
+                    }
     }
     
 }

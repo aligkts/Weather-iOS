@@ -136,14 +136,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		482F685D2291C2DA00FB8BCA /* utils */ = {
+		482F685D2291C2DA00FB8BCA /* Utils */ = {
 			isa = PBXGroup;
 			children = (
 				48DF536222B22CCC0065E5B3 /* weather_app_info.html */,
 				48BE760E228D3FB800A2AD65 /* LocationManager.swift */,
 				487C786B22940E9B00FFF9F6 /* Extension.swift */,
 			);
-			path = utils;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		4836B95A229D5638001B31C8 /* data test */ = {
@@ -181,10 +181,10 @@
 				48DF536622B22FFD0065E5B3 /* Info */,
 				48DF535722B2173A0065E5B3 /* Api */,
 				48BE7610228D428C00A2AD65 /* Main scene */,
-				48E232B12292831F005B3C2B /* add location */,
-				48BC4BCC229BAAE400872992 /* detail scene */,
-				48BE7613228D461300A2AD65 /* data */,
-				482F685D2291C2DA00FB8BCA /* utils */,
+				48E232B12292831F005B3C2B /* Add location */,
+				48BC4BCC229BAAE400872992 /* Detail scene */,
+				48BE7613228D461300A2AD65 /* Data */,
+				482F685D2291C2DA00FB8BCA /* Utils */,
 				488116C1228BCA92001D7C05 /* Assets.xcassets */,
 				48E232B82292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataClass.swift */,
 				48E232B92292C1C6005B3C2B /* FavoriteLocationEntity+CoreDataProperties.swift */,
@@ -224,14 +224,14 @@
 			path = model;
 			sourceTree = "<group>";
 		};
-		48BC4BCC229BAAE400872992 /* detail scene */ = {
+		48BC4BCC229BAAE400872992 /* Detail scene */ = {
 			isa = PBXGroup;
 			children = (
 				48BC4BCA229B9D9700872992 /* DetailViewController.swift */,
 				48BC4BCD229BAC9300872992 /* DetailViewDelegate.swift */,
 				48BC4BCF229BACBB00872992 /* DetailPresenter.swift */,
 			);
-			path = "detail scene";
+			path = "Detail scene";
 			sourceTree = "<group>";
 		};
 		48BE7610228D428C00A2AD65 /* Main scene */ = {
@@ -246,7 +246,7 @@
 			path = "Main scene";
 			sourceTree = "<group>";
 		};
-		48BE7613228D461300A2AD65 /* data */ = {
+		48BE7613228D461300A2AD65 /* Data */ = {
 			isa = PBXGroup;
 			children = (
 				48B7E10E229D386900C14984 /* model */,
@@ -255,7 +255,7 @@
 				48BC4BD1229BADB700872992 /* ForecastResponse.swift */,
 				481215DB229CF20F003371B9 /* List.swift */,
 			);
-			path = data;
+			path = Data;
 			sourceTree = "<group>";
 		};
 		48DF535722B2173A0065E5B3 /* Api */ = {
@@ -276,12 +276,12 @@
 			path = Info;
 			sourceTree = "<group>";
 		};
-		48E232B12292831F005B3C2B /* add location */ = {
+		48E232B12292831F005B3C2B /* Add location */ = {
 			isa = PBXGroup;
 			children = (
 				48E232AF229282FC005B3C2B /* AddLocationViewController.swift */,
 			);
-			path = "add location";
+			path = "Add location";
 			sourceTree = "<group>";
 		};
 		6832C30194A79F42D6DCE379 /* Pods */ = {

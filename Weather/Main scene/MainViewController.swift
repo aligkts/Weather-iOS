@@ -14,6 +14,7 @@ class MainViewController: UIViewController, MainViewDelegate {
     @IBOutlet weak var labelCurrentLocationName: UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
+    @IBOutlet weak var imgQuestionMark: UIImageView!
     @IBOutlet weak var btnAddLocation: UIButton!
     @IBOutlet weak var favoritesTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -31,6 +32,14 @@ class MainViewController: UIViewController, MainViewDelegate {
         locationManager.checkLocationServices()
         mainPresenter.getResults()
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        imgQuestionMark.isUserInteractionEnabled = true
+        imgQuestionMark.addGestureRecognizer(tapGestureRecognizer)
+    }
+    
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InfoViewController") as? InfoViewController
+        self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     @objc func loadList() {

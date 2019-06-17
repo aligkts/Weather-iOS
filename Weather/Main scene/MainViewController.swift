@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController, MainViewDelegate {
-    
+   
     @IBOutlet weak var progressLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName: UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
@@ -35,6 +35,7 @@ class MainViewController: UIViewController, MainViewDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imgQuestionMark.isUserInteractionEnabled = true
         imgQuestionMark.addGestureRecognizer(tapGestureRecognizer)
+        AlertView.instance.showAlert()
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -81,7 +82,7 @@ class MainViewController: UIViewController, MainViewDelegate {
         guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else { return }
         present(mainNavigationVC, animated: true, completion: nil)
     }
-    
+
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
@@ -137,4 +138,5 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISear
             favoritesTableView.deselectRow(at: favoritesTableView.indexPathForSelectedRow!, animated: true)
         }
     }
+    
 }

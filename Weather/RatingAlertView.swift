@@ -9,25 +9,26 @@
 import Foundation
 import UIKit
 
-class AlertView: UIView {
+class RatingAlertView: UIView {
     
-    static let instance = AlertView()
+    static let instance = RatingAlertView()
     @IBOutlet var parentView: UIView!
+    @IBOutlet weak var btnSendRate: UIButton!
+    @IBOutlet weak var btnCancelRate: UIButton!
     @IBOutlet weak var alertView: UIView!
-    @IBOutlet var view: UIView!
     @IBOutlet weak var starOne: UIButton!
     @IBOutlet weak var starTwo: UIButton!
     @IBOutlet weak var starThree: UIButton!
     @IBOutlet weak var starFour: UIButton!
     @IBOutlet weak var starFive: UIButton!
     
-    let filledImage = UIImage(named: "star_filled")
-    let emptyImage = UIImage(named: "star_empty")
+    let filledImage = UIImage(named: "filledStar")
+    let emptyImage = UIImage(named: "emptyStar")
     var rating: Int?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        Bundle.main.loadNibNamed("AlertView", owner: self, options: nil)
+        Bundle.main.loadNibNamed("RatingAlertView", owner: self, options: nil)
         commonInit()
     }
     
@@ -37,13 +38,13 @@ class AlertView: UIView {
     
     private func commonInit() {
         alertView.layer.cornerRadius = 10
-        view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
-        view.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        parentView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
+        parentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
         parentView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
     }
     
     func showAlert() {
-        UIApplication.shared.keyWindow?.addSubview(view)
+        UIApplication.shared.keyWindow?.addSubview(parentView)
     }
     
     @IBAction func starOneTapped(_ sender: UIButton) {
@@ -94,12 +95,11 @@ class AlertView: UIView {
     @IBAction func sendRate(_ sender: UIButton) {
         if let selectedRate = rating {
             print("Given rate is \(selectedRate)")
-            self.parentView.removeFromSuperview()
+            parentView.removeFromSuperview()
         }
     }
-    
     @IBAction func cancel(_ sender: UIButton) {
-        self.parentView.removeFromSuperview()
+        parentView.removeFromSuperview()
     }
     
 }

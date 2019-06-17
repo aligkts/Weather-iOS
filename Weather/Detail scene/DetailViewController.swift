@@ -23,7 +23,6 @@ class DetailViewController: UIViewController, DetailViewDelegate {
     private var forecastList: [List] = []
 
     override func viewDidLoad() {
-        self.title = "Lokasyon Detay"
         detailPresenter.setViewDelegate(detailViewDelegate: self)
         guard let clickedLatitude = self.model?.coord?.lat else {
             return

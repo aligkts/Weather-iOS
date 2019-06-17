@@ -1,6 +1,6 @@
 
 /* Class = "UILabel"; text = "The app needs your permission to get your location"; ObjectID = "6IL-ag-nJ6"; */
-"6IL-ag-nJ6.text" = "Devam edebilmek için konum izni vermeniz gerekmektedir";
+"6IL-ag-nJ6.text" = "To continue, you need to give a location permission";
 
 /* Class = "UILabel"; text = "22°"; ObjectID = "IOU-GU-TBd"; */
 "IOU-GU-TBd.text" = "22°";
@@ -24,7 +24,7 @@
 "kUK-dL-54r.text" = "Şişli";
 
 /* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "liN-iH-OfO"; */
-"liN-iH-OfO.normalTitle" = "Ayarlar";
+"liN-iH-OfO.normalTitle" = "Settings";
 
 /* Class = "UILabel"; text = "Kağıthane"; ObjectID = "pNe-LM-2v1"; */
 "pNe-LM-2v1.text" = "Kağıthane";
@@ -38,19 +38,20 @@
 /* Class = "UILabel"; text = "88"; ObjectID = "zR6-y5-tB3"; */
 "zR6-y5-tB3.text" = "88";
 
-"sY9-a6-ID1.title" = "Lokasyon Detay";
+/*navigation item*/
+"sY9-a6-ID1.title" = "Location Detail";
 
-"FLK-pS-DRp.title" = "Hava Durumu";
+/*navigation item*/
+"FLK-pS-DRp.title" = "Weather";
 
-"Nl5-jd-cSN.title" = "Yeni Lokasyon Ekle";
+/*navigation item*/
+"Nl5-jd-cSN.title" = "Add New Location";
 
 /*uilabel*/
-"HUJ-0W-c49.text" = "Uygulamamızı değerlendirmek ister misiniz?";
+"HUJ-0W-c49.text" = "Do you want to rate this app?";
 
 /*uibutton*/
-"SR6-9w-eru.normalTitle" = "İptal";
+"SR6-9w-eru.normalTitle" = "Cancel";
 
 /*uibutton*/
-"J7t-GI-Ztd.normalTitle" = "Gönder";
-
-
+"J7t-GI-Ztd.normalTitle" = "Send";

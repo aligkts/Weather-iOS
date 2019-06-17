@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Main View Controller-->
+        <!--Weather-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -156,7 +156,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" id="FLK-pS-DRp"/>
+                    <navigationItem key="navigationItem" title="Weather" id="FLK-pS-DRp"/>
                     <connections>
                         <outlet property="btnAddLocation" destination="sDf-Gg-jgq" id="EXb-h6-f5F"/>
                         <outlet property="favoritesTableView" destination="PIX-TU-bKO" id="DDB-Xa-BVx"/>
@@ -173,7 +173,7 @@
             </objects>
             <point key="canvasLocation" x="-800.00000000000011" y="-262.5"/>
         </scene>
-        <!--Detail View Controller-->
+        <!--Location Detail-->
         <scene sceneID="afI-qz-nUA">
             <objects>
                 <viewController id="bHo-Zm-cRZ" customClass="DetailViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -334,6 +334,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Do8-S2-Kuo"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Location Detail" id="sY9-a6-ID1"/>
                     <connections>
                         <outlet property="detailTableView" destination="8sy-gq-Zd0" id="vUw-6U-FrD"/>
                         <outlet property="imgLocationIcon" destination="rqr-3J-65x" id="GfU-jz-pO1"/>
@@ -348,7 +349,7 @@
             </objects>
             <point key="canvasLocation" x="-13.043478260869566" y="-263.16964285714283"/>
         </scene>
-        <!--Add Location View Controller-->
+        <!--Add New Location-->
         <scene sceneID="nEU-Jg-NsW">
             <objects>
                 <viewController storyboardIdentifier="AddLocationViewController" id="B0p-33-LQU" customClass="AddLocationViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
@@ -373,6 +374,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FFe-zk-mdx"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Add New Location" id="Nl5-jd-cSN"/>
                     <connections>
                         <outlet property="mapView" destination="xqG-K7-cLV" id="Q7y-ac-2i5"/>
                     </connections>
@@ -384,7 +386,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-13" y="437"/>
+            <point key="canvasLocation" x="-13.043478260869566" y="436.60714285714283"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="ZQI-PE-tIp">
@@ -428,15 +430,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Devam etmek için konum izni vermeniz gerekmektedir" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IL-ag-nJ6">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The app needs your permission to get your location" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6IL-ag-nJ6">
                                 <rect key="frame" x="20" y="144" width="374" height="41"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liN-iH-OfO">
-                                <rect key="frame" x="183" y="212" width="48" height="30"/>
-                                <state key="normal" title="Ayarlar"/>
+                            <button opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="250" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="liN-iH-OfO">
+                                <rect key="frame" x="175" y="212" width="64" height="33"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <state key="normal" title="Settings"/>
                                 <connections>
                                     <action selector="goSettingsForPermission:" destination="SQD-dl-86H" eventType="touchUpInside" id="zT3-f3-aUZ"/>
                                 </connections>
@@ -446,17 +449,20 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="6IL-ag-nJ6" secondAttribute="trailing" constant="20" id="DFz-z0-s1p"/>
                             <constraint firstItem="6IL-ag-nJ6" firstAttribute="top" secondItem="LCr-ZL-1SB" secondAttribute="top" constant="100" id="GAX-Lq-OmT"/>
-                            <constraint firstItem="LCr-ZL-1SB" firstAttribute="trailing" secondItem="liN-iH-OfO" secondAttribute="trailing" constant="183" id="IvJ-kB-xSr"/>
                             <constraint firstItem="6IL-ag-nJ6" firstAttribute="leading" secondItem="7tv-Tn-abh" secondAttribute="leading" constant="20" id="ako-dH-cSo"/>
                             <constraint firstItem="liN-iH-OfO" firstAttribute="top" secondItem="6IL-ag-nJ6" secondAttribute="bottom" constant="27" id="gef-HQ-LUf"/>
-                            <constraint firstItem="liN-iH-OfO" firstAttribute="leading" secondItem="LCr-ZL-1SB" secondAttribute="leading" constant="183" id="sHy-26-wbb"/>
+                            <constraint firstItem="liN-iH-OfO" firstAttribute="centerX" secondItem="LCr-ZL-1SB" secondAttribute="centerX" id="is7-dS-n3V"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LCr-ZL-1SB"/>
                     </view>
+                    <connections>
+                        <outlet property="btnSettings" destination="liN-iH-OfO" id="A1V-nd-8bJ"/>
+                        <outlet property="labelWarning" destination="6IL-ag-nJ6" id="2Fp-EO-Gwr"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jeF-JW-JQX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-13" y="-950"/>
+            <point key="canvasLocation" x="-13.043478260869566" y="-950.22321428571422"/>
         </scene>
         <!--Main Navigation Controller-->
         <scene sceneID="vrT-h0-dlq">

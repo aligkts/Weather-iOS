@@ -26,7 +26,11 @@ class MainViewController: UIViewController, MainViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Weather"
+        if checkLanguageIsTurkish() {
+            API.deviceLanguage = "tr"
+        } else {
+            API.deviceLanguage = "en"
+        }
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
@@ -35,7 +39,6 @@ class MainViewController: UIViewController, MainViewDelegate {
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
         imgQuestionMark.isUserInteractionEnabled = true
         imgQuestionMark.addGestureRecognizer(tapGestureRecognizer)
-        AlertView.instance.showAlert()
     }
     
     @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -55,6 +58,7 @@ class MainViewController: UIViewController, MainViewDelegate {
 
     func foundCurrentLocation(latitude: (Double), longitude: (Double)) {
         mainPresenter.makeApiRequest(latitude: latitude, longitude: longitude)
+        RatingAlertView.instance.showAlert()
     }
     
     func setCurrentUiComponents(modelResponse: WeatherResponse) {
@@ -82,7 +86,7 @@ class MainViewController: UIViewController, MainViewDelegate {
         guard let mainNavigationVC = mainStoryboard.instantiateViewController(withIdentifier: "PermissionDeniedViewController") as? PermissionDeniedViewController else { return }
         present(mainNavigationVC, animated: true, completion: nil)
     }
-
+    
 }
 
 extension MainViewController: UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {

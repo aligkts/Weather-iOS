@@ -15,7 +15,6 @@ class MainPresenter {
     var favoriteLocationList = [FavoriteLocationEntity]()
     var modelList: [WeatherResponse] = []
     var apiClient: ApiInteractor
-    let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? ""
 
     init() {
         self.apiClient = ApiInteractor()
@@ -28,7 +27,7 @@ class MainPresenter {
     func makeApiRequest(latitude: Double, longitude: Double) {
         apiClient.getWeatherByLatLng(latitude: latitude,
                                      longitude: longitude,
-                                     unitType: selectedUnitType,
+                                     unitType: Constant.metric,
                                      language: API.deviceLanguage,
                                      completionHandler: { responseData in
                                         do {
@@ -55,7 +54,7 @@ class MainPresenter {
         let id: String = favoriteLocation.id
         apiClient.getWeatherByLatLng(latitude: favoriteLocation.latitude,
                                      longitude: favoriteLocation.longitude,
-                                     unitType: selectedUnitType,
+                                     unitType: Constant.metric,
                                      language: API.deviceLanguage,
                                      completionHandler: { responseData in
                                         do {

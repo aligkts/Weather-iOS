@@ -13,7 +13,7 @@ struct WeatherResponse: Decodable, Equatable {
 	let sys: Sys?
     let timezone: Int?
 	let id: Int?
-	let name: String?
+    let name: String?
 	let cod: Int?
     var uuid: String?
     var favoriteLocation: FavoriteLocationEntity?

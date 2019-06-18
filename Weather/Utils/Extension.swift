@@ -32,7 +32,6 @@ extension Double {
         let temperatureInt = (temperatureWithDecimals as NSString).integerValue
         return temperatureInt
     }
-    
 }
 
 extension String {
@@ -51,15 +50,25 @@ extension String {
 }
 
 extension Int {
+    public func temperatureToCelsius() -> String {
+        let celcius = Int(5.0 / 9.0 * (Double(self) - 32.0))
+        return "\(celcius)" + "°"
+    }
+    
+    public func temperatureToFahrenheit() -> String {
+        let fahrenheit = self * 9 / 5 + 32
+        return "\(fahrenheit)" + "°F"
+    }
+    
     public func temperatureByUnitType() -> String? {
-        let type = UserDefaults.standard.string(forKey: "unitType") ?? ""
+        let type = UserDefaults.standard.string(forKey: "unitType") ?? "Metric"
         switch type {
-            case "Metric":
-                return "\(self)" + "°"
-            case "Imperial":
-                return "\(self)" + "°F"
-            default:
-                break
+        case "Metric":
+            return "\(self)" + "°"
+        case "Imperial":
+            return "\(self)" + "°F"
+        default:
+            break
         }
         return nil
     }

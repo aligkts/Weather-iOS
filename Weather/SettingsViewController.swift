@@ -14,10 +14,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
-        let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? ""
-        if selectedUnitType == "MetrirefreshUnitTypec" {
+        let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
+        if selectedUnitType == Constant.metric {
             segmentedControl.selectedSegmentIndex = 0
-        } else if selectedUnitType == "Imperial" {
+        } else if selectedUnitType == Constant.imperial {
             segmentedControl.selectedSegmentIndex = 1
         }
     }
@@ -25,9 +25,11 @@ class SettingsViewController: UIViewController {
     @IBAction func unitTypeChanged(_ sender: UISegmentedControl) {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            UserDefaults.standard.set("Metric", forKey: "unitType")
+            UserDefaults.standard.set(Constant.metric, forKey: "unitType")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         case 1:
-            UserDefaults.standard.set("Imperial", forKey: "unitType")
+            UserDefaults.standard.set(Constant.imperial, forKey: "unitType")
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         default:
             break
         }

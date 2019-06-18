@@ -9,7 +9,7 @@
 import UIKit
 
 class MainViewController: UIViewController, MainViewDelegate {
-   
+ 
     @IBOutlet weak var progressLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName: UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
@@ -24,13 +24,15 @@ class MainViewController: UIViewController, MainViewDelegate {
     var favoritesList: [WeatherResponse] = []
     var filteredFavoritesList: [WeatherResponse] = []
     var model: WeatherResponse?
+    var localWeatherModel: WeatherResponse?
+    var requested: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if checkLanguageIsTurkish() {
-            API.deviceLanguage = "tr"
+            API.deviceLanguage = Constant.turkish
         } else {
-            API.deviceLanguage = "en"
+            API.deviceLanguage = Constant.english
         }
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
@@ -44,7 +46,12 @@ class MainViewController: UIViewController, MainViewDelegate {
         imgSettings.isUserInteractionEnabled = true
         imgSettings.addGestureRecognizer(tapGestureRecognizerSettings)
         imgSettings.isUserInteractionEnabled = true
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if requested == false, let  localModel = localWeatherModel {
+            setCurrentUiComponents(modelResponse: localModel)
+        }
     }
     
     @objc func infoTapped(tapGestureRecognizerInfo: UITapGestureRecognizer) {
@@ -72,10 +79,16 @@ class MainViewController: UIViewController, MainViewDelegate {
     }
     
     func setCurrentUiComponents(modelResponse: WeatherResponse) {
+        localWeatherModel = modelResponse
         self.progressLayout.isHidden = true
         self.labelCurrentLocationName.text = modelResponse.name
         if let tempDouble = modelResponse.main?.temp {
-            self.labelCurrentLocationTemp.text = tempDouble.removeDecimal().temperatureByUnitType()
+            let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
+            if selectedUnitType == Constant.metric {
+                self.labelCurrentLocationTemp.text = "\(tempDouble.removeDecimal())" + "°"
+            } else if selectedUnitType == Constant.imperial {
+                self.labelCurrentLocationTemp.text = tempDouble.removeDecimal().temperatureToFahrenheit()
+            }
         }
         if let iconCode: String = modelResponse.weather?.first?.icon {
             imgCurrentWeatherIcon.imageFromIconCode(iconCode: iconCode)

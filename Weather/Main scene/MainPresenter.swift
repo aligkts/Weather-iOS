@@ -28,7 +28,7 @@ class MainPresenter {
         apiClient.getWeatherByLatLng(latitude: latitude,
                                      longitude: longitude,
                                      unitType: "Metric",
-                                     language: "tr",
+                                     language: API.deviceLanguage,
                                      completionHandler: { responseData in
                                         do {
                                             let weather = try JSONDecoder().decode(WeatherResponse.self, from: responseData)
@@ -55,7 +55,7 @@ class MainPresenter {
         apiClient.getWeatherByLatLng(latitude: favoriteLocation.latitude,
                                      longitude: favoriteLocation.longitude,
                                      unitType: "Metric",
-                                     language: "tr",
+                                     language: API.deviceLanguage,
                                      completionHandler: { responseData in
                                         do {
                                             var weather = try JSONDecoder().decode(WeatherResponse.self, from: responseData)

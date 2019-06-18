@@ -15,5 +15,6 @@ struct API {
     static let WEATHER = "weather?"
     static let FORECAST = "forecast?"
     static let API_IMAGE_BASE_URL = "http://openweathermap.org/img/w/"
+    static var deviceLanguage = "tr"
     
 }

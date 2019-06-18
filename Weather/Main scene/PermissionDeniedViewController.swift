@@ -11,6 +11,9 @@ import UIKit
 
 class PermissionDeniedViewController: UIViewController {
     
+    @IBOutlet weak var labelWarning: UILabel!
+    @IBOutlet weak var btnSettings: UIButton!
+    
     @IBAction func goSettingsForPermission(_ sender: UIButton) {
         UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
     }

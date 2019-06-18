@@ -47,4 +47,9 @@ extension String {
         }
         return nil
     }
+    
+}
+
+func checkLanguageIsTurkish() -> Bool {
+    return NSLocale.preferredLanguages[0].range(of: "tr") != nil
 }

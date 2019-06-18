@@ -32,6 +32,7 @@ extension Double {
         let temperatureInt = (temperatureWithDecimals as NSString).integerValue
         return temperatureInt
     }
+    
 }
 
 extension String {
@@ -47,7 +48,21 @@ extension String {
         }
         return nil
     }
-    
+}
+
+extension Int {
+    public func temperatureByUnitType() -> String? {
+        let type = UserDefaults.standard.string(forKey: "unitType") ?? ""
+        switch type {
+            case "Metric":
+                return "\(self)" + "°"
+            case "Imperial":
+                return "\(self)" + "°F"
+            default:
+                break
+        }
+        return nil
+    }
 }
 
 func checkLanguageIsTurkish() -> Bool {

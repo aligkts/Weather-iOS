@@ -1,0 +1,9 @@
+
+/* Class = "UILabel"; text = "Do you want to rate this app?"; ObjectID = "HUJ-0W-c49"; */
+"HUJ-0W-c49.text" = "Do you want to rate this app?";
+
+/* Class = "UIButton"; normalTitle = "Send"; ObjectID = "J7t-GI-Ztd"; */
+"J7t-GI-Ztd.normalTitle" = "Send";
+
+/* Class = "UIButton"; normalTitle = "Cancel"; ObjectID = "SR6-9w-eru"; */
+"SR6-9w-eru.normalTitle" = "Cancel";

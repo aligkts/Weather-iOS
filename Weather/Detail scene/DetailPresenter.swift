@@ -26,7 +26,7 @@ class DetailPresenter {
         apiClient.getForecastByLatLng(latitude: latitude,
                                      longitude: longitude,
                                      unitType: "Metric",
-                                     language: "tr",
+                                     language: API.deviceLanguage,
                                      completionHandler: { responseData in
                                         do {
                                             let forecast = try JSONDecoder().decode(ForecastResponse.self, from: responseData)

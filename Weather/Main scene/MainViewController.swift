@@ -58,7 +58,6 @@ class MainViewController: UIViewController, MainViewDelegate {
 
     func foundCurrentLocation(latitude: (Double), longitude: (Double)) {
         mainPresenter.makeApiRequest(latitude: latitude, longitude: longitude)
-        RatingAlertView.instance.showAlert()
     }
     
     func setCurrentUiComponents(modelResponse: WeatherResponse) {
@@ -70,6 +69,7 @@ class MainViewController: UIViewController, MainViewDelegate {
         if let iconCode: String = modelResponse.weather?.first?.icon {
             imgCurrentWeatherIcon.imageFromIconCode(iconCode: iconCode)
         }
+        RatingAlertView.instance.showAlert()
     }
     
     @IBAction func navigateAddLocation(_ sender: UIButton) {

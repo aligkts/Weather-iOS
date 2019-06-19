@@ -96,6 +96,7 @@ class RatingAlertView: UIView {
         if let selectedRate = rating {
             print("Given rate is \(selectedRate)")
             parentView.removeFromSuperview()
+            UserDefaults.standard.set("RatedBefore", forKey: "ratingStatus")
         }
     }
     @IBAction func cancel(_ sender: UIButton) {

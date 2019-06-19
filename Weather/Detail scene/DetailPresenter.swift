@@ -13,7 +13,8 @@ class DetailPresenter {
     weak private var detailViewDelegate: DetailViewDelegate?
     private var listForDays: [List] = []
     var apiClient: ApiInteractor
-    
+    let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
+
     init() {
         self.apiClient = ApiInteractor()
     }
@@ -25,7 +26,7 @@ class DetailPresenter {
     func makeForecastRequest(latitude: Double, longitude: Double) {
         apiClient.getForecastByLatLng(latitude: latitude,
                                      longitude: longitude,
-                                     unitType: "Metric",
+                                     unitType: Constant.metric,
                                      language: API.deviceLanguage,
                                      completionHandler: { responseData in
                                         do {

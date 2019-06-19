@@ -16,9 +16,13 @@ class WeatherCell: UITableViewCell {
  
     func setWeatherItem(item: WeatherResponse) {
         txtItemName.text = item.name
-        if let temp = item.main?.temp {
-            let temperatureValue = Int(temp)
-            txtItemTemperature.text = String(temperatureValue) + "°"
+        if let tempDouble = item.main?.temp {
+            let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
+            if selectedUnitType == Constant.metric {
+                self.txtItemTemperature.text = "\(tempDouble.removeDecimal())" + "°"
+            } else if selectedUnitType == Constant.imperial {
+                self.txtItemTemperature.text = tempDouble.removeDecimal().temperatureToFahrenheit()
+            }
             if let iconCode: String = item.weather?.first?.icon {
                 imgItemIcon.imageFromIconCode(iconCode: iconCode)
             }

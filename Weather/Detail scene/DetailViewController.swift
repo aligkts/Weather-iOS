@@ -42,7 +42,12 @@ class DetailViewController: UIViewController, DetailViewDelegate {
         guard let clickedTemperature = self.model?.main?.temp else {
             return
         }
-        labelLocationTemperature.text = "\(clickedTemperature.removeDecimal())" + "°"
+        let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
+        if selectedUnitType == Constant.metric {
+            self.labelLocationTemperature.text = "\(clickedTemperature.removeDecimal())" + "°"
+        } else if selectedUnitType == Constant.imperial {
+            self.labelLocationTemperature.text = clickedTemperature.removeDecimal().temperatureToFahrenheit()
+        }
         guard let clickedName = self.model?.name else {
             return
         }

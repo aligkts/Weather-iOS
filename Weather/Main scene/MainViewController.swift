@@ -9,12 +9,13 @@
 import UIKit
 
 class MainViewController: UIViewController, MainViewDelegate {
-   
+ 
     @IBOutlet weak var progressLayout: UIView!
     @IBOutlet weak var labelCurrentLocationName: UILabel!
     @IBOutlet weak var labelCurrentLocationTemp: UILabel!
     @IBOutlet weak var imgCurrentWeatherIcon: UIImageView!
     @IBOutlet weak var imgQuestionMark: UIImageView!
+    @IBOutlet weak var imgSettings: UIImageView!
     @IBOutlet weak var btnAddLocation: UIButton!
     @IBOutlet weak var favoritesTableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -23,26 +24,43 @@ class MainViewController: UIViewController, MainViewDelegate {
     var favoritesList: [WeatherResponse] = []
     var filteredFavoritesList: [WeatherResponse] = []
     var model: WeatherResponse?
+    var localWeatherModel: WeatherResponse?
+    var requested: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         if checkLanguageIsTurkish() {
-            API.deviceLanguage = "tr"
+            API.deviceLanguage = Constant.turkish
         } else {
-            API.deviceLanguage = "en"
+            API.deviceLanguage = Constant.english
         }
         mainPresenter.setViewDelegate(mainViewDelegate: self)
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
         mainPresenter.getResults()
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+        let tapGestureRecognizerInfo = UITapGestureRecognizer(target: self, action: #selector(infoTapped(tapGestureRecognizerInfo:)))
         imgQuestionMark.isUserInteractionEnabled = true
-        imgQuestionMark.addGestureRecognizer(tapGestureRecognizer)
+        imgQuestionMark.addGestureRecognizer(tapGestureRecognizerInfo)
+        let tapGestureRecognizerSettings = UITapGestureRecognizer(target: self, action: #selector(settingsTapped(tapGestureRecognizerSettings:)))
+        imgSettings.isUserInteractionEnabled = true
+        imgSettings.addGestureRecognizer(tapGestureRecognizerSettings)
+        imgSettings.isUserInteractionEnabled = true
     }
     
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+    override func viewWillAppear(_ animated: Bool) {
+        if requested == false, let  localModel = localWeatherModel {
+            setCurrentUiComponents(modelResponse: localModel)
+        }
+    }
+    
+    @objc func infoTapped(tapGestureRecognizerInfo: UITapGestureRecognizer) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "InfoViewController") as? InfoViewController
+        self.navigationController?.pushViewController(vc!, animated: true)
+    }
+    
+    @objc func settingsTapped(tapGestureRecognizerSettings: UITapGestureRecognizer) {
+        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
@@ -61,15 +79,23 @@ class MainViewController: UIViewController, MainViewDelegate {
     }
     
     func setCurrentUiComponents(modelResponse: WeatherResponse) {
+        localWeatherModel = modelResponse
         self.progressLayout.isHidden = true
         self.labelCurrentLocationName.text = modelResponse.name
         if let tempDouble = modelResponse.main?.temp {
-            self.labelCurrentLocationTemp.text = "\(tempDouble.removeDecimal())"+"°"
+            let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
+            if selectedUnitType == Constant.metric {
+                self.labelCurrentLocationTemp.text = "\(tempDouble.removeDecimal())" + "°"
+            } else if selectedUnitType == Constant.imperial {
+                self.labelCurrentLocationTemp.text = tempDouble.removeDecimal().temperatureToFahrenheit()
+            }
         }
         if let iconCode: String = modelResponse.weather?.first?.icon {
             imgCurrentWeatherIcon.imageFromIconCode(iconCode: iconCode)
         }
-        RatingAlertView.instance.showAlert()
+        if UserDefaults.standard.string(forKey: "ratingStatus") ?? "" != "RatedBefore" {
+            RatingAlertView.instance.showAlert()
+        }
     }
     
     @IBAction func navigateAddLocation(_ sender: UIButton) {

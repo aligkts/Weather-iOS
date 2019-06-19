@@ -128,6 +128,9 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="settings" translatesAutoresizingMaskIntoConstraints="NO" id="Tcj-fz-K7A" userLabel="settings">
+                                <rect key="frame" x="340.5" y="202" width="16.5" height="16.5"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -139,6 +142,7 @@
                             <constraint firstItem="JDp-Ea-WOC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DtA-zZ-4H8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="PIX-TU-bKO" secondAttribute="trailing" constant="30" id="F6C-Pl-poX"/>
                             <constraint firstItem="sDf-Gg-jgq" firstAttribute="bottom" secondItem="JDp-Ea-WOC" secondAttribute="bottom" id="LUh-yI-4j4"/>
+                            <constraint firstItem="Tcj-fz-K7A" firstAttribute="width" secondItem="Tcj-fz-K7A" secondAttribute="height" multiplier="1:1" id="N7M-wP-Qqe"/>
                             <constraint firstItem="JDp-Ea-WOC" firstAttribute="top" secondItem="IOU-GU-TBd" secondAttribute="bottom" constant="97" id="ONC-1z-lvv"/>
                             <constraint firstItem="Np3-XN-pz1" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="P8y-9S-lBL"/>
                             <constraint firstItem="IOU-GU-TBd" firstAttribute="top" secondItem="kUK-dL-54r" secondAttribute="bottom" constant="27" id="RaG-aS-kfd"/>
@@ -147,8 +151,10 @@
                             <constraint firstItem="JFv-og-F8k" firstAttribute="centerY" secondItem="kUK-dL-54r" secondAttribute="centerY" id="VSK-00-EeZ"/>
                             <constraint firstItem="kUK-dL-54r" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="X3o-kx-zDu"/>
                             <constraint firstItem="IOU-GU-TBd" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Y64-9x-edC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Tcj-fz-K7A" secondAttribute="trailing" constant="57" id="bi7-Dy-zll"/>
                             <constraint firstItem="PIX-TU-bKO" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="8" id="ikK-S3-TSP"/>
                             <constraint firstItem="kUK-dL-54r" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="112" id="kLx-aK-Sxg"/>
+                            <constraint firstItem="Tcj-fz-K7A" firstAttribute="centerY" secondItem="kUK-dL-54r" secondAttribute="centerY" id="lfX-8k-Efv"/>
                             <constraint firstItem="PIX-TU-bKO" firstAttribute="top" secondItem="JDp-Ea-WOC" secondAttribute="bottom" id="qKg-bw-SX8"/>
                             <constraint firstItem="IOU-GU-TBd" firstAttribute="leading" secondItem="x2O-px-D7v" secondAttribute="trailing" constant="14" id="scp-aU-fbl"/>
                             <constraint firstItem="JFv-og-F8k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="57" id="xGc-Hz-pFz"/>
@@ -161,6 +167,7 @@
                         <outlet property="favoritesTableView" destination="PIX-TU-bKO" id="DDB-Xa-BVx"/>
                         <outlet property="imgCurrentWeatherIcon" destination="x2O-px-D7v" id="621-6h-zZu"/>
                         <outlet property="imgQuestionMark" destination="JFv-og-F8k" id="b4u-Y0-eaL"/>
+                        <outlet property="imgSettings" destination="Tcj-fz-K7A" id="uAK-sy-bhr"/>
                         <outlet property="labelCurrentLocationName" destination="kUK-dL-54r" id="7qS-S6-7gv"/>
                         <outlet property="labelCurrentLocationTemp" destination="IOU-GU-TBd" id="ctU-2h-ljs"/>
                         <outlet property="progressLayout" destination="D3f-5U-zzw" id="NYQ-mc-hIr"/>
@@ -348,6 +355,40 @@
             </objects>
             <point key="canvasLocation" x="-13.043478260869566" y="-263.16964285714283"/>
         </scene>
+        <!--Settings View Controller-->
+        <scene sceneID="orX-zM-XdV">
+            <objects>
+                <viewController storyboardIdentifier="SettingsViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="217-do-MSk" customClass="SettingsViewController" customModule="Weather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Dh3-4M-EU5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="YPv-dx-O8r">
+                                <rect key="frame" x="128.5" y="434" width="157" height="29"/>
+                                <segments>
+                                    <segment title="Celcius"/>
+                                    <segment title="Fahrenheit"/>
+                                </segments>
+                                <connections>
+                                    <action selector="unitTypeChanged:" destination="217-do-MSk" eventType="valueChanged" id="JoF-IH-YYJ"/>
+                                </connections>
+                            </segmentedControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="YPv-dx-O8r" firstAttribute="centerY" secondItem="Dh3-4M-EU5" secondAttribute="centerY" id="DWu-db-fJh"/>
+                            <constraint firstItem="YPv-dx-O8r" firstAttribute="centerX" secondItem="NTJ-W9-Rf2" secondAttribute="centerX" id="a0O-Bn-lCL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="NTJ-W9-Rf2"/>
+                    </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="YPv-dx-O8r" id="6T4-YL-PWr"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TFV-xo-5wZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-800" y="433"/>
+        </scene>
         <!--Add New Location-->
         <scene sceneID="nEU-Jg-NsW">
             <objects>
@@ -488,6 +529,7 @@
         <image name="humidity" width="170.5" height="170.5"/>
         <image name="question_mark" width="16.5" height="16.5"/>
         <image name="rain" width="170.5" height="170.5"/>
+        <image name="settings" width="16.5" height="16.5"/>
         <image name="wind" width="170.5" height="170.5"/>
     </resources>
 </document>

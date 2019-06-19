@@ -12,7 +12,8 @@ import UIKit
 class SettingsViewController: UIViewController {
     
     @IBOutlet weak var segmentedControl: UISegmentedControl!
-    
+    @objc let positionKVO = DataManager.sharedInstance
+
     override func viewDidLoad() {
         let selectedUnitType = UserDefaults.standard.string(forKey: "unitType") ?? Constant.metric
         if selectedUnitType == Constant.metric {
@@ -26,10 +27,10 @@ class SettingsViewController: UIViewController {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
             UserDefaults.standard.set(Constant.metric, forKey: "unitType")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+            positionKVO.position = Constant.metric
         case 1:
             UserDefaults.standard.set(Constant.imperial, forKey: "unitType")
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+            positionKVO.position = Constant.imperial
         default:
             break
         }

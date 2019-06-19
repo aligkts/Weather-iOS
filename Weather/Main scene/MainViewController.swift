@@ -26,7 +26,9 @@ class MainViewController: UIViewController, MainViewDelegate {
     var model: WeatherResponse?
     var localWeatherModel: WeatherResponse?
     var requested: Bool = false
-    
+    @objc let dataManager: DataManager = DataManager.sharedInstance
+    var positionObservation: NSKeyValueObservation?
+
     override func viewDidLoad() {
         super.viewDidLoad()
         if checkLanguageIsTurkish() {
@@ -38,7 +40,6 @@ class MainViewController: UIViewController, MainViewDelegate {
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
         mainPresenter.getResults()
-        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         let tapGestureRecognizerInfo = UITapGestureRecognizer(target: self, action: #selector(infoTapped(tapGestureRecognizerInfo:)))
         imgQuestionMark.isUserInteractionEnabled = true
         imgQuestionMark.addGestureRecognizer(tapGestureRecognizerInfo)
@@ -46,6 +47,11 @@ class MainViewController: UIViewController, MainViewDelegate {
         imgSettings.isUserInteractionEnabled = true
         imgSettings.addGestureRecognizer(tapGestureRecognizerSettings)
         imgSettings.isUserInteractionEnabled = true
+        positionObservation = dataManager.observe(\.position, options: [.new, .old, .initial, .prior]) { (vc, change) in
+            guard let updatedPosition = change.newValue else { return }
+            print(updatedPosition)
+            self.mainPresenter.getResults()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -62,10 +68,6 @@ class MainViewController: UIViewController, MainViewDelegate {
     @objc func settingsTapped(tapGestureRecognizerSettings: UITapGestureRecognizer) {
         let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "SettingsViewController") as? SettingsViewController
         self.navigationController?.pushViewController(vc!, animated: true)
-    }
-    
-    @objc func loadList() {
-        mainPresenter.getResults()
     }
     
     func setListToTableView(model: [WeatherResponse]) {

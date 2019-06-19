@@ -40,6 +40,7 @@ class MainViewController: UIViewController, MainViewDelegate {
         locationManager.setViewDelegate(mainViewDelegate: self)
         locationManager.checkLocationServices()
         mainPresenter.getResults()
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         let tapGestureRecognizerInfo = UITapGestureRecognizer(target: self, action: #selector(infoTapped(tapGestureRecognizerInfo:)))
         imgQuestionMark.isUserInteractionEnabled = true
         imgQuestionMark.addGestureRecognizer(tapGestureRecognizerInfo)
@@ -56,6 +57,10 @@ class MainViewController: UIViewController, MainViewDelegate {
         if requested == false, let  localModel = localWeatherModel {
             setCurrentUiComponents(modelResponse: localModel)
         }
+    }
+    
+    @objc func loadList() {
+        mainPresenter.getResults()
     }
     
     @objc func infoTapped(tapGestureRecognizerInfo: UITapGestureRecognizer) {

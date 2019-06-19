@@ -48,8 +48,6 @@ class MainViewController: UIViewController, MainViewDelegate {
         imgSettings.addGestureRecognizer(tapGestureRecognizerSettings)
         imgSettings.isUserInteractionEnabled = true
         positionObservation = dataManager.observe(\.position, options: [.new, .old, .initial, .prior]) { (vc, change) in
-            guard let updatedPosition = change.newValue else { return }
-            print(updatedPosition)
             self.mainPresenter.getResults()
         }
     }

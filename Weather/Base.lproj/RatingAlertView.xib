@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RatingAlertView" customModule="Weather" customModuleProvider="target">
+            <connections>
+                <outlet property="alertView" destination="cSl-Ks-ydO" id="ged-gi-hhZ"/>
+                <outlet property="btnCancelRate" destination="SR6-9w-eru" id="gqM-pK-mDh"/>
+                <outlet property="btnSendRate" destination="J7t-GI-Ztd" id="1Da-my-s9W"/>
+                <outlet property="parentView" destination="iN0-l3-epB" id="UC4-Ol-izO"/>
+                <outlet property="starFive" destination="pbK-aa-1zR" id="2jc-OS-Nc8"/>
+                <outlet property="starFour" destination="k2k-Te-Rmj" id="VOT-9T-Cng"/>
+                <outlet property="starOne" destination="lfW-Li-uNd" id="d3F-zF-Hpo"/>
+                <outlet property="starThree" destination="x4T-oj-fE2" id="My2-IY-rWC"/>
+                <outlet property="starTwo" destination="CA0-Nj-aI8" id="m2O-Lb-lsJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="374" height="690"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2nI-a1-4jL">
+                    <rect key="frame" x="0.0" y="44" width="374" height="612"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cSl-Ks-ydO">
+                            <rect key="frame" x="65" y="181" width="244" height="250"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Do you want to rate this app?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HUJ-0W-c49">
+                                    <rect key="frame" x="10.5" y="25" width="223.5" height="20.5"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J7t-GI-Ztd">
+                                    <rect key="frame" x="148" y="190" width="36" height="30"/>
+                                    <state key="normal" title="Send"/>
+                                    <connections>
+                                        <action selector="sendRate:" destination="-1" eventType="touchUpInside" id="paC-gw-sjV"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SR6-9w-eru">
+                                    <rect key="frame" x="60" y="190" width="48" height="30"/>
+                                    <state key="normal" title="Cancel"/>
+                                    <connections>
+                                        <action selector="cancel:" destination="-1" eventType="touchUpInside" id="rA2-I9-19H"/>
+                                    </connections>
+                                </button>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="PkQ-ox-7at">
+                                    <rect key="frame" x="5.5" y="109" width="233" height="33"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lfW-Li-uNd">
+                                            <rect key="frame" x="0.0" y="0.0" width="33" height="33"/>
+                                            <state key="normal" image="emptyStar"/>
+                                            <connections>
+                                                <action selector="starOneTapped:" destination="-1" eventType="touchUpInside" id="XL9-Xs-HzA"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CA0-Nj-aI8">
+                                            <rect key="frame" x="50" y="0.0" width="33" height="33"/>
+                                            <state key="normal" image="emptyStar"/>
+                                            <connections>
+                                                <action selector="starTwoTapped:" destination="-1" eventType="touchUpInside" id="eHU-ev-Llf"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x4T-oj-fE2">
+                                            <rect key="frame" x="100" y="0.0" width="33" height="33"/>
+                                            <state key="normal" image="emptyStar"/>
+                                            <connections>
+                                                <action selector="starThreeTapped:" destination="-1" eventType="touchUpInside" id="EyL-da-Gge"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k2k-Te-Rmj">
+                                            <rect key="frame" x="150" y="0.0" width="33" height="33"/>
+                                            <state key="normal" image="emptyStar"/>
+                                            <connections>
+                                                <action selector="starFourTapped:" destination="-1" eventType="touchUpInside" id="Mpe-e3-gJH"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbK-aa-1zR">
+                                            <rect key="frame" x="200" y="0.0" width="33" height="33"/>
+                                            <state key="normal" image="emptyStar"/>
+                                            <connections>
+                                                <action selector="starFiveTapped:" destination="-1" eventType="touchUpInside" id="uUb-PS-QWu"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </stackView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="250" id="0X0-g4-Pgc"/>
+                                <constraint firstItem="HUJ-0W-c49" firstAttribute="centerX" secondItem="cSl-Ks-ydO" secondAttribute="centerX" id="8kL-xx-gIB"/>
+                                <constraint firstItem="SR6-9w-eru" firstAttribute="top" secondItem="PkQ-ox-7at" secondAttribute="bottom" constant="48" id="90C-Jv-feb"/>
+                                <constraint firstAttribute="bottom" secondItem="J7t-GI-Ztd" secondAttribute="bottom" constant="30" id="M7c-wH-ez0"/>
+                                <constraint firstItem="PkQ-ox-7at" firstAttribute="centerX" secondItem="cSl-Ks-ydO" secondAttribute="centerX" id="SQ9-SG-3NS"/>
+                                <constraint firstItem="J7t-GI-Ztd" firstAttribute="leading" secondItem="SR6-9w-eru" secondAttribute="trailing" constant="40" id="YcD-cK-pO0"/>
+                                <constraint firstItem="SR6-9w-eru" firstAttribute="leading" secondItem="cSl-Ks-ydO" secondAttribute="leading" constant="60" id="eVC-41-MfC"/>
+                                <constraint firstAttribute="bottom" secondItem="SR6-9w-eru" secondAttribute="bottom" constant="30" id="mGl-hq-G4D"/>
+                                <constraint firstItem="J7t-GI-Ztd" firstAttribute="top" secondItem="PkQ-ox-7at" secondAttribute="bottom" constant="48" id="nab-y4-uzE"/>
+                                <constraint firstItem="HUJ-0W-c49" firstAttribute="top" secondItem="cSl-Ks-ydO" secondAttribute="top" constant="25" id="w7B-wu-A0P"/>
+                                <constraint firstAttribute="trailing" secondItem="J7t-GI-Ztd" secondAttribute="trailing" constant="60" id="yEi-wx-Xzw"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="cSl-Ks-ydO" firstAttribute="centerY" secondItem="2nI-a1-4jL" secondAttribute="centerY" id="3pJ-oC-IMq"/>
+                        <constraint firstItem="cSl-Ks-ydO" firstAttribute="centerX" secondItem="2nI-a1-4jL" secondAttribute="centerX" id="c8F-iE-sJ7"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="2nI-a1-4jL" secondAttribute="trailing" id="6Vf-4L-NEr"/>
+                <constraint firstItem="2nI-a1-4jL" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="V0o-RF-MJf"/>
+                <constraint firstItem="2nI-a1-4jL" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="hIO-rw-hWq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="2nI-a1-4jL" secondAttribute="bottom" id="q5c-v9-g3a"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="108.69565217391305" y="84.375"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="emptyStar" width="33" height="33"/>
+    </resources>
+</document>

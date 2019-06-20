@@ -1,0 +1,47 @@
+
+/* Class = "UILabel"; text = "The app needs your permission to get your location"; ObjectID = "6IL-ag-nJ6"; */
+"6IL-ag-nJ6.text" = "Devam edebilmek için konum izni vermeniz gerekmektedir";
+
+/* Class = "UILabel"; text = "22°"; ObjectID = "IOU-GU-TBd"; */
+"IOU-GU-TBd.text" = "22°";
+
+/* Class = "UILabel"; text = "Şişli"; ObjectID = "Kud-9S-7lt"; */
+"Kud-9S-7lt.text" = "Şişli";
+
+/* Class = "UILabel"; text = "17°"; ObjectID = "R41-Xl-pIe"; */
+"R41-Xl-pIe.text" = "17°";
+
+/* Class = "UILabel"; text = "4"; ObjectID = "SCW-nw-Leu"; */
+"SCW-nw-Leu.text" = "4";
+
+/* Class = "UILabel"; text = "0"; ObjectID = "TDb-QE-itJ"; */
+"TDb-QE-itJ.text" = "0";
+
+/* Class = "UILabel"; text = "22°"; ObjectID = "XX8-oB-PM3"; */
+"XX8-oB-PM3.text" = "22°";
+
+/* Class = "UILabel"; text = "Şişli"; ObjectID = "kUK-dL-54r"; */
+"kUK-dL-54r.text" = "Şişli";
+
+/* Class = "UIButton"; normalTitle = "Settings"; ObjectID = "liN-iH-OfO"; */
+"liN-iH-OfO.normalTitle" = "Ayarlar";
+
+/* Class = "UILabel"; text = "Kağıthane"; ObjectID = "pNe-LM-2v1"; */
+"pNe-LM-2v1.text" = "Kağıthane";
+
+/* Class = "UILabel"; text = "17°"; ObjectID = "uDo-JS-NW7"; */
+"uDo-JS-NW7.text" = "17°";
+
+/* Class = "UILabel"; text = "Kağıthane"; ObjectID = "w4t-z6-cke"; */
+"w4t-z6-cke.text" = "Kağıthane";
+
+/* Class = "UILabel"; text = "88"; ObjectID = "zR6-y5-tB3"; */
+"zR6-y5-tB3.text" = "88";
+
+"sY9-a6-ID1.title" = "Lokasyon Detay";
+
+"FLK-pS-DRp.title" = "Hava Durumu";
+
+"Nl5-jd-cSN.title" = "Yeni Lokasyon Ekle";
+
+
